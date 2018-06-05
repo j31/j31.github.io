@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="../css/styles.css">
+  
+  <title>Evergreen</title>
+</head>
+<body>
+  
+  <nav class="navbar navbar-expand-lg navbar-light bg-white">
+    <a class="navbar-brand" href="../index.html">
+      <img id="logo" src="../img/evergreen-logo.png" alt="logo">Evergreen
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link disabled" href="#">Settings</a>
+        <a class="nav-item nav-link disabled" href="#">About</a>
+      </div>
+    </div>
+  </nav>
+  
+  
+  
+  <section id="home-menu">
+    <div class="container text-center">
+      <div class="row">
+        <div class="col-md-4 mx-auto score">
+          <h3>Score: 0</h3>
+        </div>
+        <div class="col-md-4 mx-auto">
+          <a id="flash-cards-btn" class="btn btn-success btn-xl game-btn"  href="#">FLASH CARDS</a><br>
+          <a class="btn btn-success btn-xl game-btn disabled" href="#">QUIZ PRACTICE</a><br>
+          <a class="btn btn-success btn-xl game-btn disabled" href="#">PLAY GAME</a><br>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+  <section id="flash-cards" class="d-none">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 mx-auto">
+          <a class="btn btn-danger btn-sm game-btn" href="#">Close Flashcards</a>
+          <hr>
+          <div class="progress"></div><hr>
+          <div class="question"></div><hr>
+          <div class="answer"></div>
+          <div class="reveal-btn text-center">
+            <a id="show-answer-btn" class="btn btn-success btn-xl game-btn d-none" href="#">Show Answer</a>
+          </div>
+          <div class="check-btn text-center">
+            <div id="new-term" class="d-none">
+              <a id="just-learned-btn" class="btn btn-success btn-xl game-btn" href="#">Just Learned</a>
+              <a id="already-knew-btn" class="btn btn-success btn-xl game-btn" href="#">Already Knew</a>
+            </div>
+            <div id="old-term" class="d-none">
+              <a id="still-learning-btn" class="btn btn-success btn-xl game-btn" href="#">Still Learning</a>
+              <a id="know-well-btn" class="btn btn-success btn-xl game-btn" href="#">Know Well</a>
+            </div>
+          </div>
+          
+          
+          
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+  
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  
+  <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+  
+  
+  <script src="../js/main.js"></script>
+</body>
+</html>

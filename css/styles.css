@@ -1,0 +1,56 @@
+#logo {
+  width: 45px;
+  height: 45px;
+  margin: 20px;
+}
+
+#logo-large {
+  width: 70px;
+  height: 70px;
+  padding: 5px;
+}
+
+.index-banner {
+  height:100vh;
+  background: url('../img/header.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size:cover;
+  background-attachment: fixed;
+}
+
+.index-text {
+  margin-top:5%;
+}
+
+#about, #try-it {
+  padding: 5% 0px;
+}
+
+.green-dash {
+  width: 50px;
+  border: 2px solid green;
+}
+
+footer {
+  text-align: center;
+  padding-top: 20px;
+}
+
+h1 {
+  font-size: 4rem;
+}
+
+.game-btn {
+  width: 200px;
+  margin: 10px 0;
+}
+
+.score {
+  width: 200px;
+  height: 100px;
+  margin: 10px 0;
+  padding: 30px 0;
+  background: #0E7E1266; 
+  border: 1px solid grey;
+}

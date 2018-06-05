@@ -12,82 +12,168 @@
   <!-- Custom CSS -->
   <link rel="stylesheet" href="../css/styles.css">
   
-  <title>Evergreen</title>
-</head>
-<body>
-  
-  <nav class="navbar navbar-expand-lg navbar-light bg-white">
-    <a class="navbar-brand" href="../index.html">
-      <img id="logo" src="../img/evergreen-logo.png" alt="logo">Evergreen
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
-        <a class="nav-item nav-link disabled" href="#">Settings</a>
-        <a class="nav-item nav-link disabled" href="#">About</a>
-      </div>
-    </div>
-  </nav>
-  
-  
-  
-  <section id="home-menu">
-    <div class="container text-center">
-      <div class="row">
-        <div class="col-md-4 mx-auto score">
-          <h3>Score: <span id="score">0</span>%</h3>
-        </div>
-        <div class="col-md-4 mx-auto">
-          <a id="flash-cards-btn" class="btn btn-success btn-xl game-btn"  href="#">FLASH CARDS</a><br>
-          <a class="btn btn-success btn-xl game-btn disabled" href="#">QUIZ PRACTICE</a><br>
-          <a class="btn btn-success btn-xl game-btn disabled" href="#">PLAY GAME</a><br>
-        </div>
-      </div>
-    </div>
-  </section>
-  
-  
-  <section id="flash-cards" class="d-none">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6 mx-auto">
-          <a id="close-btn" class="btn btn-outline-danger btn-sm" href="#">Close</a>
-          <br><br>
-          <div class="progress"></div>
-          <br>
-          <div class="question"></div><hr>
-          <div class="answer"></div>
-          <div class="reveal-btn text-center">
-            <a id="show-answer-btn" class="btn btn-success btn-xl game-btn d-none" href="#">Show Answer</a>
+  <!-- Logo icon in <title> tag -->
+    <link rel="shortcut icon" type="image/x-icon" href="../img/evergreen.ico" />
+    
+    <title>Evergreen Home</title>
+  </head>
+  <body>
+    
+    <div id="navigation">
+      <nav class="navbar navbar-expand-lg navbar-light bg-white">
+        <a class="navbar-brand" href="../index.html">
+          <img id="logo" src="../img/evergreen-logo.png" alt="evergreen">Evergreen
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-item nav-link active" href="home.html">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link" href="settings.html">Settings</a>
+            <a class="nav-item nav-link disabled" href="#">About</a>
           </div>
-          <hr>
-          <div class="check-btn text-center">
+        </div>
+      </nav>
+    </div>
+    
+    
+    <section id="home-menu">
+      <div class="container text-center">
+        <div class="row">
+          <div class="col-md-4 mx-auto score">
+            <h3>Score: <span id="score">0</span>%</h3>
+          </div>
+          <div class="col-md-4 mx-auto">
+            <a id="flash-cards-btn" class="btn btn-success btn-xl game-btn"  href="#">FLASH CARDS</a><br>
+            <a id="quiz-btn" class="btn btn-success btn-xl game-btn" href="#">QUIZ PRACTICE</a><br>
+            <a id="play-game-btn" class="btn btn-success btn-xl game-btn disabled" href="#">PLAY GAME</a><br>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!--
+      QUIZ SECTION ################################################################
+    -->
+    <section id="quiz" class="d-none">
+      <br><br>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-9 text-right">
+            <!-- <a id="close-btn" class="btn btn-outline-secondary btn-sm" href="#">Close</a> -->
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 mx-auto">
+            <br>
+            <div class="progress"></div>
+            <br>
+            <div class="question"></div><hr>
+
+            <div class="answer">
+              <div class="quiz-answer">
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="quiz-answer" id="quiz-answer1" value="option1">
+                  <label class="form-check-label" for="quiz-answer1">
+                    
+                    &nbsp; 1. <span id="answer1"></span>
+                  
+                  </label>
+                </div>
+              </div>
+              
+              <div class="quiz-answer">
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="quiz-answer" id="quiz-answer2" value="option2">
+                  <label class="form-check-label" for="quiz-answer2">
+                     
+                    &nbsp; 2. <span id="answer2"></span>
+                   
+                  </label>
+                </div>
+              </div>
+              
+              <div class="quiz-answer">
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="quiz-answer" id="quiz-answer3" value="option3">
+                  <label class="form-check-label" for="quiz-answer3">
+                    &nbsp; 3.  <span id="answer3"></span>
+                  </label>
+                </div>
+              </div>
+              
+              <div class="quiz-answer">
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="quiz-answer" id="quiz-answer4" value="option4">
+                  <label class="form-check-label" for="quiz-answer3">
+                    &nbsp; 4.  <span id="answer4"></span>
+                  </label>
+                </div>
+              </div>
+              
+            </div>
+            <br>
+            <div class="reveal-btn text-center">
+              <a id="check-answer-btn" class="btn btn-outline-success btn-xl game-btn" href="#">Check Answer</a>
+            </div>
+            
+            <!-- <div class="check-btn text-center d-none">
               <a id="wrong-btn" class="btn btn-danger btn-xl game-btn" href="#">Wrong</a>
               <a id="correct-btn" class="btn btn-success btn-xl game-btn" href="#">Correct</a>
+            </div> -->
+            <a id="continue-btn" class="btn btn-success btn-xl game-btn d-none"  href="#">CONTINUE</a><br>
           </div>
-          <a id="continue-btn" class="btn btn-success btn-xl game-btn d-none"  href="#">CONTINUE</a><br>
-          
         </div>
       </div>
-    </div>
-  </section>
-  
-  
-  
-  <!-- Optional JavaScript -->
-  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  
-  <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
-  
-  
-  <script src="../js/main.js"></script>
-  <script src="../js/data.js"></script>
-</body>
-</html>
+    </section>
+    
+    
+    <!--
+      FLASH CARDS SECTION ############################################################
+    -->
+    <section id="flash-cards" class="d-none">
+      <br><br>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-9 text-right">
+            <a id="close-btn" class="btn btn-outline-secondary btn-sm" href="#">Close</a>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 mx-auto">
+            <br>
+            <div class="progress"></div>
+            <br>
+            <div class="question"></div><hr>
+            <div class="answer"></div>
+            <div class="reveal-btn text-center">
+              <a id="show-answer-btn" class="btn btn-outline-success btn-xl game-btn d-none" href="#">Show Answer</a>
+            </div>
+            
+            <div class="check-btn text-center">
+              <a id="wrong-btn" class="btn btn-danger btn-xl game-btn" href="#">Wrong</a>
+              <a id="correct-btn" class="btn btn-success btn-xl game-btn" href="#">Correct</a>
+            </div>
+            <a id="continue-btn" class="btn btn-success btn-xl game-btn d-none"  href="#">CONTINUE</a><br>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    
+    
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+    
+    
+    <script src="../js/main.js"></script>
+    <script src="../js/data.js"></script>
+  </body>
+  </html>

@@ -54,3 +54,17 @@ h1 {
   background: #0E7E1266; 
   border: 1px solid grey;
 }
+
+.answer {
+  min-height: 190px;
+}
+
+.answer-text {
+  font-size: 1.3rem;
+}
+
+.quiz-answer {
+  border-bottom: 1px solid lightgrey;
+  padding: 5px 5px;
+  margin-bottom: 5px;
+}

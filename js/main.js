@@ -48,9 +48,9 @@ $(document).ready(function() {
       var term = ev.user.knowledge.find(function(t) {
         return t.strength === i;
       });
-    console.log("i ",i)
-    console.log("term ",term)
-    i++
+      console.log("i ",i)
+      console.log("term ",term)
+      i++
     }
     
     //  Store user knoweldge term into ev Class object
@@ -98,7 +98,6 @@ $(document).ready(function() {
     $('#show-answer-btn').removeClass('d-none')
     
     $('#show-answer-btn').unbind('click')
-    
     $('#show-answer-btn').click(function(){
       $('#show-answer-btn').addClass('d-none');
       var html = "<p>" + ev.answer + "</p>"
@@ -110,42 +109,30 @@ $(document).ready(function() {
   
   // Get user answer
   Evergreen.prototype.getUserAnswer = function () {
+    $('.check-btn').removeClass('d-none');
+
+    $('#wrong-btn').unbind('click');
+    $('#wrong-btn').click(function(){
+      if (ev.knowledgeTerm.strength === 0)
+      ev.knowledgeTerm.strength = 1;
+      else
+      ev.knowledgeTerm.strength -= 1;
+      $('.check-btn').addClass('d-none');
+      flashcards();
+    });
     
-    if (ev.knowledgeTerm.strength === 0) {
-      $('#new-term').removeClass('d-none');
-      
-      $('#just-learned-btn').unbind('click');
-      $('#just-learned-btn').click(function(){
-        ev.knowledgeTerm.strength += 1;
-        $('#new-term').addClass('d-none');
-        flashcards();
-      });
-      
-      $('#already-knew-btn').unbind('click');
-      $('#already-knew-btn').click(function(){
-        ev.knowledgeTerm.strength += 3;
-        $('#new-term').addClass('d-none');
-        flashcards();
-      });
-    } else {
+    $('#correct-btn').unbind('click');
+    $('#correct-btn').click(function(){
+      if (ev.knowledgeTerm.strength === 0)
+      ev.knowledgeTerm.strength = 3;
+      else
+      ev.knowledgeTerm.strength += 1;
+      $('.check-btn').addClass('d-none');
+      flashcards();
+    }); 
     
-      $('#old-term').removeClass('d-none')
-    
-      $('#knew-not-btn').unbind('click');
-      $('#knew-not-btn').click(function(){
-        ev.knowledgeTerm.strength -= 1;
-        $('#old-term').addClass('d-none');
-        flashcards();
-      });
-    
-      $('#knew-it-btn').unbind('click');
-      $('#knew-it-btn').click(function(){
-        ev.knowledgeTerm.strength += 1;
-        $('#old-term').addClass('d-none');
-        flashcards();
-      }); 
-    }
   }
+  
   
   //  Listen on home-menu buttons (Flashcards...)
   function homeMenu () {
@@ -160,6 +147,7 @@ $(document).ready(function() {
   
   //  Init Flashcards
   function initFlashcards () {
+    $('.check-btn').addClass('d-none');
     $('#flash-cards').toggleClass('d-none')
     ev.state = "flashcards";
     ev.knowledgeTerm = {};
@@ -168,9 +156,11 @@ $(document).ready(function() {
     ev.questionNum = 0;
     ev.score = 0;
     
+    $('#close-btn').unbind('click');
     $('#close-btn').click(function(){
       $('#flash-cards').toggleClass('d-none');
       $('#home-menu').toggleClass('d-none');
+      ev.updateScore();
     });
   };
   

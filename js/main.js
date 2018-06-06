@@ -32,6 +32,7 @@ $(document).ready(function() {
   //  Listen on home-menu buttons (Flashcards...)
   Evergreen.prototype.homeMenu = function () {
     ev.updateScore()
+    $('#flash-cards-btn').unbind('click');
     $('#flash-cards-btn').click(function(){
       $('#home-menu').toggleClass('d-none')
       $('#navigation').toggleClass('d-none')
@@ -39,6 +40,7 @@ $(document).ready(function() {
       ev.flashcards();
     });
     
+    $('#quiz-btn').unbind('click');
     $('#quiz-btn').click(function(){
       $('#home-menu').toggleClass('d-none')
       $('#navigation').toggleClass('d-none')
@@ -57,11 +59,21 @@ $(document).ready(function() {
     ev.answer = "";
     ev.questionNum = 0;
     ev.score = 0;
+
+    $('#quiz-close-btn').unbind('click');
+    $('#quiz-close-btn').click(function(){
+      $('#quiz').toggleClass('d-none');
+      $('#home-menu').toggleClass('d-none');
+      $('#navigation').toggleClass('d-none');
+      ev.updateScore();
+    });
   }
   
   //  Quiz 
   Evergreen.prototype.quiz = function () {
     if (ev.questionNum < 10) {
+      $('#check-answer-btn').removeClass('d-none');
+      $("#check-answer-btn").addClass('disabled');
       ev.getQuestion();
     } else {
       ev.showResults();
@@ -104,7 +116,6 @@ $(document).ready(function() {
     
     // find sum of user strength scores
     var userStrength = ev.user.knowledge.reduce((a,b) => a + b.strength, 0);
-    console.log("userStrength ", userStrength);
     
     // divide by total possible strength scores to get %, save in session object
     ev.score = Math.round(userStrength / ( ev.user.knowledge.length * 5 )*100);
@@ -173,9 +184,10 @@ $(document).ready(function() {
     ev.revealAnswer();
   }
   
-  // Reveal answer when Show button is clicked
+  // Reveal Answer(s)
   Evergreen.prototype.revealAnswer = function () {
     
+    // for FLASHCARDS display answer when show button is clicked
     if (ev.state === "flashcards") {
       $('#show-answer-btn').removeClass('d-none')
       // reset onClick function to reveal answer
@@ -187,29 +199,63 @@ $(document).ready(function() {
         
         ev.getUserAnswer();
       });
+    } 
+    
+    // for QUIZ display multiple choice answers
+    if (ev.state === "quiz") {
       
-    } else if (ev.state === "quiz") {
-      //
-      //  
+      var html = '<div id="answer-box1" class="quiz-answer"><div class="form-check"><input class="form-check-input" type="radio" name="quiz-answer" id="quiz-answer1" value="option1"><label class="form-check-label" for="quiz-answer1">&nbsp; 1. <span id="answer1"></span></label></div></div><div id="answer-box2" class="quiz-answer"><div class="form-check"><input class="form-check-input" type="radio" name="quiz-answer" id="quiz-answer2" value="option2"><label class="form-check-label" for="quiz-answer2">&nbsp; 2. <span id="answer2"></span></label></div></div><div id="answer-box3" class="quiz-answer"><div class="form-check"><input class="form-check-input" type="radio" name="quiz-answer" id="quiz-answer3" value="option3"><label class="form-check-label" for="quiz-answer3">&nbsp; 3.  <span id="answer3"></span></label></div></div><div id="answer-box4" class="quiz-answer"><div class="form-check"><input class="form-check-input" type="radio" name="quiz-answer" id="quiz-answer4" value="option4"><label class="form-check-label" for="quiz-answer4">&nbsp; 4.  <span id="answer4"></span></label></div></div>'
+      $('.answer').html(html);
+
+
+      //uncheck all checkboxes, clear highighting
+      $('input[type="radio"]').prop('checked', false);
+      $(".quiz-answer").css("background-color", "");
+
+      
+
+
       var answers = []
-      answers.push(ev.answer)
-      answers.push("The longer someone is away, the more you realize how much you love or miss them.");
-      answers.push("What someone actually does means more than what they say they will do.");
-      answers.push("Even if you are late with a commitment, it's still important to follow through.")
       
+      // add correct answer to answer array
+      answers.push(ev.answer)
+      
+      
+      // for the three decoy answers
+      for (var x=0; x<3; x++) {
+        
+        // pick a term iD at random from the dictionary, make sure it's not answer
+        var randomId = ev.knowledgeTerm.termId
+        while (randomId === ev.knowledgeTerm.termId ) {
+          randomId = Math.floor(Math.random() * ev.dict.length)+1
+        }
+        
+        // look this random ID up in the dictionary
+        var term = ev.dict.find(function(t) {
+          return t.termId === randomId;
+        });
+        
+        // add decoy answer to answers array
+        answers.push(term.def)
+      }
+      
+      // display answers in random order on page
       for (var x=1; x<=4; x++) {
         var random = Math.floor(Math.random() * answers.length)
         $('#answer' + x).text(answers[random])
         answers.splice(random,1)
       }
+      
+      ev.getUserChoice();
     }
   }
   
-  // Get user response (wrong/correct buttons)
+  
+  // Get user response on FLASHCARDS (wrong/correct buttons)
   Evergreen.prototype.getUserAnswer = function () {
     $('.check-btn').removeClass('d-none');
     
-    // reset binding and adjust strength
+    // WRONG button
     $('#wrong-btn').unbind('click');
     $('#wrong-btn').click(function(){
       if (ev.knowledgeTerm.strength === 0)
@@ -221,10 +267,11 @@ $(document).ready(function() {
       ev.flashcards();
     });
     
+    // CORRECT button
     $('#correct-btn').unbind('click');
     $('#correct-btn').click(function(){
       if (ev.knowledgeTerm.strength === 0)
-      ev.knowledgeTerm.strength = 3;
+      ev.knowledgeTerm.strength = 2;
       else if (ev.knowledgeTerm.strength === 5)
       ev.knowledgeTerm.strength = 5;
       else
@@ -236,9 +283,102 @@ $(document).ready(function() {
   }
   
   
+  
+  
+  // Get user response on QUIZ (multiple choice)
+  Evergreen.prototype.getUserChoice = function () {
+    
+    // enable check-answer-btn when radio selection made
+    $("input:radio").change(function () {
+      $("#check-answer-btn").removeClass('disabled');
+    });
+    
+    //  bind correction logic to check button
+    $('#check-answer-btn').click(function(){
+      
+      // determine which answer was selected
+      if ($('input[name=quiz-answer]:checked').val() === 'option1'){
+        var selection = $('#answer1').text()
+        var selectionNum = 1;
+      }
+      
+      if ($('input[name=quiz-answer]:checked').val() === 'option2'){
+        var selection = $('#answer2').text()
+        var selectionNum = 2;
+      }
+      
+      if ($('input[name=quiz-answer]:checked').val() === 'option3'){
+        var selection = $('#answer3').text()
+        var selectionNum = 3;
+      }
+      
+      if ($('input[name=quiz-answer]:checked').val() === 'option4'){
+        var selection = $('#answer4').text()
+        var selectionNum = 4;
+      }
+      
+      
+      //  Highlight correct answer
+      if ( $('#answer1').text() === ev.answer )
+      $("#answer-box1").css("background-color", "lightgreen");
+      if ( $('#answer2').text() === ev.answer )
+      $("#answer-box2").css("background-color", "lightgreen");
+      if ( $('#answer3').text() === ev.answer )
+      $("#answer-box3").css("background-color", "lightgreen");
+      if ( $('#answer4').text() === ev.answer )
+      $("#answer-box4").css("background-color", "lightgreen");
+      
+      
+      // determine if selection matches answer
+      var isCorrect = (selection === ev.answer)
+      
+      
+      // IF SELECTION is WRONG
+      if (!isCorrect) {
+        if (ev.knowledgeTerm.strength === 0)
+        ev.knowledgeTerm.strength = 1;
+        else
+        ev.knowledgeTerm.strength -= 1;
+        $('#check-answer-btn').addClass('d-none');
+        $('.incorrect').removeClass('d-none');
+      };
+      
+      // IF SELECTION is CORRECT
+      if (isCorrect) {
+        if (ev.knowledgeTerm.strength === 0)
+        ev.knowledgeTerm.strength = 3;
+        else if (ev.knowledgeTerm.strength === 5)
+        ev.knowledgeTerm.strength = 5;
+        else
+        ev.knowledgeTerm.strength += 1;
+        $('#check-answer-btn').addClass('d-none');
+        $('.correct').removeClass('d-none');
+      }; 
+      
+      
+      //  bind correction logic to check button
+      $('#continue-quiz-btn').removeClass('d-none');
+      
+      $('#continue-quiz-btn').unbind('click')
+      $('#continue-quiz-btn').click(function(){
+        
+        $('#continue-quiz-btn').addClass('d-none');
+        $('.correct').addClass('d-none');
+        $('.incorrect').addClass('d-none');
+        
+        
+        ev.quiz();
+      })
+      
+    });
+    
+    
+  }
+  
+  
   Evergreen.prototype.showResults = function () {
     $('#close-btn').addClass('d-none')
-    $('#continue-btn').removeClass('d-none')
+    $('.continue-btn').removeClass('d-none')
     $('.answer').html("");
     
     var percentDone = 100;
@@ -248,13 +388,18 @@ $(document).ready(function() {
     console.log(ev.score)
     $('.question').html('<h3>Your new score is ' + ev.score + '%!</h3>')
     
-    $('#continue-btn').unbind('click');
-    $('#continue-btn').click(function(){
-      $('#continue-btn').addClass('d-none')
-      $('#flash-cards').toggleClass('d-none');
+    $('.continue-btn').unbind('click');
+    $('.continue-btn').click(function(){
+      $('.continue-btn').addClass('d-none')
       $('#home-menu').toggleClass('d-none');
       $('#navigation').toggleClass('d-none');
-      ev.updateScore()
+
+      if (ev.state === "flashcards")
+      $('#flash-cards').toggleClass('d-none');
+
+      if (ev.state === "quiz")
+      $('#quiz').toggleClass('d-none');
+      ev.homeMenu()
     });
   }
   

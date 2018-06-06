@@ -9,6 +9,10 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
   
+  <!-- FontAwesome CSS -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+  
+  
   <!-- Custom CSS -->
   <link rel="stylesheet" href="../css/styles.css">
   
@@ -61,7 +65,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-9 text-right">
-            <!-- <a id="close-btn" class="btn btn-outline-secondary btn-sm" href="#">Close</a> -->
+            <a id="quiz-close-btn" class="btn btn-outline-secondary btn-sm" href="#">Close</a>
           </div>
         </div>
         <div class="row">
@@ -70,31 +74,31 @@
             <div class="progress"></div>
             <br>
             <div class="question"></div><hr>
-
+            
             <div class="answer">
-              <div class="quiz-answer">
+              <div id="answer-box1" class="quiz-answer">
                 <div class="form-check">
                   <input class="form-check-input" type="radio" name="quiz-answer" id="quiz-answer1" value="option1">
                   <label class="form-check-label" for="quiz-answer1">
                     
                     &nbsp; 1. <span id="answer1"></span>
-                  
+                    
                   </label>
                 </div>
               </div>
               
-              <div class="quiz-answer">
+              <div id="answer-box2" class="quiz-answer">
                 <div class="form-check">
                   <input class="form-check-input" type="radio" name="quiz-answer" id="quiz-answer2" value="option2">
                   <label class="form-check-label" for="quiz-answer2">
-                     
+                    
                     &nbsp; 2. <span id="answer2"></span>
-                   
+                    
                   </label>
                 </div>
               </div>
               
-              <div class="quiz-answer">
+              <div id="answer-box3" class="quiz-answer">
                 <div class="form-check">
                   <input class="form-check-input" type="radio" name="quiz-answer" id="quiz-answer3" value="option3">
                   <label class="form-check-label" for="quiz-answer3">
@@ -103,27 +107,40 @@
                 </div>
               </div>
               
-              <div class="quiz-answer">
+              <div id="answer-box4" class="quiz-answer">
                 <div class="form-check">
                   <input class="form-check-input" type="radio" name="quiz-answer" id="quiz-answer4" value="option4">
-                  <label class="form-check-label" for="quiz-answer3">
+                  <label class="form-check-label" for="quiz-answer4">
                     &nbsp; 4.  <span id="answer4"></span>
                   </label>
                 </div>
               </div>
-              
-            </div>
-            <br>
-            <div class="reveal-btn text-center">
-              <a id="check-answer-btn" class="btn btn-outline-success btn-xl game-btn" href="#">Check Answer</a>
             </div>
             
-            <!-- <div class="check-btn text-center d-none">
-              <a id="wrong-btn" class="btn btn-danger btn-xl game-btn" href="#">Wrong</a>
-              <a id="correct-btn" class="btn btn-success btn-xl game-btn" href="#">Correct</a>
-            </div> -->
-            <a id="continue-btn" class="btn btn-success btn-xl game-btn d-none"  href="#">CONTINUE</a><br>
+            <br>
+            <div class="text-center">
+              <a id="check-answer-btn" class="btn btn-outline-success btn-xl game-btn disabled" href="#">Check Answer</a>
+            </div>
+            
+            
+            <div class="row">
+              <div class="col-md-3 mx-auto">
+                
+                <div class="correct d-none text-center">
+                  <i class="fas fa-check-circle fa-4x"></i>
+                </div>
+                <div class="incorrect d-none text-center">
+                  <i class="fas fa-times-circle fa-4x"></i>
+                </div>
+                
+              </div> 
+              <div class="col-md-3 mx-auto">
+                <a id="continue-quiz-btn" class="btn btn-outline-success btn-xl game-btn d-none"  href="#">CONTINUE</a><br>
+                <a class="continue-btn btn btn-success btn-xl game-btn d-none"  href="#">CONTINUE</a><br>
+              </div>
+            </div>
           </div>
+          
         </div>
       </div>
     </section>
@@ -155,7 +172,8 @@
               <a id="wrong-btn" class="btn btn-danger btn-xl game-btn" href="#">Wrong</a>
               <a id="correct-btn" class="btn btn-success btn-xl game-btn" href="#">Correct</a>
             </div>
-            <a id="continue-btn" class="btn btn-success btn-xl game-btn d-none"  href="#">CONTINUE</a><br>
+            <a class="continue-btn btn btn-success btn-xl game-btn d-none"  href="#">CONTINUE</a><br>
+          
           </div>
         </div>
       </div>

@@ -37,37 +37,417 @@
       </nav>
     </div>
     
+    <!-- BEGIN DUMMY SETTINGS -->
     
-    <div class="container">
-      <div class="row">
-        
-        <div class="col-md-9 mx-auto">
-          <hr>
-          
-          <p>
-            User1 knowledge object:
-          </p>
-          <textarea id="user1-textarea" name="user1" id="" cols="60" rows="5"></textarea>
-          <p>
-            <a id="user1-textarea-btn" class="btn btn-outline-success btn-sm" href="#">Update</a>
-          </p>
-        </div>
-      </div>
+    <div class="container" align="left">
+      <hr>
+      <p><em>Features that are currently not selectable will be available in the future.</em></p>
     </div>
     
     
-    
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    
-    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
-    
-    
-    <script src="../js/main.js"></script>
-    <script src="../js/data.js"></script>
-  </body>
-  </html>
+    <div class="container" align="left">
+      <div class="row">
+        <div class="col">
+          <form>
+            <h4>Edition</h4>
+            <div class="form-check">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" name="Edition" id="Edition" value="Global" checked>
+                Global
+              </label>
+            </div>
+            
+            <div class="form-check disabled">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" name="Edition" id="Edition" value="U.S." disabled>
+                U.S.
+              </label>
+            </div>
+            
+            <div class="form-check disabled">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" name="Edition" id="Edition" value="Europe" disabled>
+                Europe
+              </label>
+            </div>
+          </form>
+        </div>  <!-- col -->
+        
+        <div class="col">
+          <form>
+            <h4>Profile</h4>
+            <div class="form-check">
+              <label class="form-check-label">
+                <input class="form-check-input" type="checkbox" name="Profile" value="Learner" checked>
+                Student or Learner
+              </label>
+            </div>
+            
+            <div class="form-check disabled">
+              <label class="form-check-label">
+                <input class="form-check-input" type="checkbox" name="Profile" value="Coach" disabled>
+                Teacher, Parent or Coach
+              </label>
+            </div>
+            
+            <div class="form-check disabled">
+              <label class="form-check-label">
+                <input class="form-check-input" type="checkbox" name="Profile" value="School" disabled>
+                School, District or Organization
+              </label>
+            </div>
+          </form>
+        </div>  <!-- col -->
+        
+        
+        <div class="col">
+          <form>
+            <h4>Goals</h4>
+            <div class="form-check">
+              <label class="form-check-label">
+                <input class="form-check-input" type="checkbox" name="Profile" value="School" checked>
+                General Knowlege
+              </label>
+            </div>
+            
+            <div class="form-check">
+              <label class="form-check-label">
+                <input class="form-check-input" type="checkbox" name="Profile" value="Learner">
+                Cultural Literacy
+              </label>
+            </div>
+            
+            <div class="form-check">
+              <label class="form-check-label">
+                <input class="form-check-input" type="checkbox" name="Profile" value="Coach">
+                Global Awareness
+              </label>
+            </div>
+            
+            <div class="form-check">
+              <label class="form-check-label">
+                <input class="form-check-input" type="checkbox" name="Profile" value="School">
+                Academic
+              </label>
+            </div>
+            
+            <div class="form-check">
+              <label class="form-check-label">
+                <input class="form-check-input" type="checkbox" name="Profile" value="School">
+                Professional
+              </label>
+            </div>
+            
+          </form>
+        </div>  <!-- col -->
+        
+        
+        <div class="col">
+          <form>
+            <h4>Level</h4>
+            <div class="form-check">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" name="Edition" id="" value="Global" checked>
+                Start with the basics
+              </label>
+            </div>
+            
+            <div class="form-check">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" name="Edition" id="" value="U.S." disabled>
+                Mix in harder topics
+              </label>
+            </div>
+            
+            <div class="form-check">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" name="Edition" id="" value="Europe" disabled>
+                Throw me in the deep end
+              </label>
+            </div>
+          </form>
+        </div>  <!-- col -->
+      </div> <!-- container for table -->
+      
+      <hr>
+      
+      <div class="container" align="left">
+        <p><em>For broad general knoweldge, we recommend leaving all areas checked.  If you don't want to learn about a particular area, uncheck it here.  You can change these settings at any time.</em></p>
+      </div>
+      
+      <div class="container" align="left">
+        <div class="row">
+          <div class="col">
+            <form>
+              <h4>Writings</h4>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="checkbox" value="Philosophy" checked>
+                  Philosophy
+                </label>
+              </div>
+              
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="checkbox" value="Religion" checked>
+                  Religion
+                </label>
+              </div>
+              
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="checkbox" value="Literature" checked>
+                  Literature
+                </label>
+              </div>
+              
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="checkbox" value="Language" checked>
+                  Language
+                </label>
+              </div>
+              
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="checkbox" value="Mythology" checked>
+                  Mythology
+                </label>
+              </div>
+              
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="checkbox" value="Folklore" checked>
+                  Folklore
+                </label>
+              </div>
+              
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="checkbox" value="Proverbs" checked>
+                  Proverbs
+                </label>
+              </div>
+              
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="checkbox" value="Idioms" checked>
+                  Idioms
+                </label>
+              </div>
+            </form>
+          </div>
+          
+          
+          
+          <div class="col">
+            <form>
+              <h4>Arts</h4>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="checkbox" value="Classical Music" checked>
+                  Classical Music
+                </label>
+              </div>
+              
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="checkbox" value="Fine Arts" checked>
+                  Fine Arts
+                </label>
+              </div>
+              
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="checkbox" value="Performing Arts" checked>
+                  Performing Arts
+                </label>
+              </div>
+              
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="checkbox" value="Popular Music" checked>
+                  Popular Music
+                </label>
+              </div>
+              
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="checkbox" value="Film and Television" checked>
+                  Film and Television
+                </label>
+              </div>
+              
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="checkbox" value="Sport" checked>
+                  Sport
+                </label>
+              </div>
+              
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="checkbox" value="Games" checked>
+                  Games
+                </label>
+              </div>
+              
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="checkbox" value="Fashion" checked>
+                  Fashion
+                </label>
+              </div>
+              
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="checkbox" value="Food" checked>
+                  Food
+                </label>
+              </div>
+            </form>
+          </div>
+          
+          
+          <div class="col">
+            <form>
+              <h4>World</h4>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="checkbox" value="Pre-modern History (before 1500)" checked>
+                  Pre-modern History
+                </label>
+              </div>
+              
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="checkbox" value="Modern History (1500-1900)" checked>
+                  Modern History
+                </label>
+              </div>
+              
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="checkbox" value="Contemportary History (since 1900)" checked>
+                  Contemporary History
+                </label>
+              </div>
+              
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="checkbox" value="Politics" checked>
+                  Politics
+                </label>
+              </div>
+              
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="checkbox" value="Geography" checked>
+                  Geography
+                </label>
+              </div>
+              
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="checkbox" value="Business and Economics" checked>
+                  Business and Economics
+                </label>
+              </div>
+            </form>
+          </div>
+          
+          
+          
+          <div class="col">
+            <form>
+              <h4>Science</h4>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="checkbox" value="Physical Sciences" checked>
+                  Physical Sciences
+                </label>
+              </div>
+              
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="checkbox" value="Social Sciences" checked>
+                  Social Sciences
+                </label>
+              </div>
+              
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="checkbox" value="Earth Sciences" checked>
+                  Earth Sciences
+                </label>
+              </div>
+              
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="checkbox" value="Life Sciences" checked>
+                  Life Sciences
+                  
+                </label>
+              </div>
+              
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="checkbox" value="Medicine and Health" checked>
+                  Medicine and Health
+                </label>
+              </div>
+              
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="checkbox" value="Technology" checked>
+                  Technology
+                </label>
+              </div>
+            </form>
+          </div>  <!-- col -->
+          
+        </div> <!-- row -->
+      </div> <!-- container for table -->
+      
+      
+      
+      <br><br>
+      <p>Advanced Settings:</p>
+      <hr>
+      
+      
+      <!-- END DUMMY SETTINGS -->
+      
+      <div class="container">
+        <div class="row">
+          
+          <div class="col-md-9 mx-auto">
+            
+            
+            <p>
+              User1 knowledge object:
+            </p>
+            <textarea id="user1-textarea" name="user1" id="" cols="60" rows="5"></textarea>
+            <p>
+              <a id="user1-textarea-btn" class="btn btn-outline-success btn-sm" href="#">Update</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      
+      
+      
+      <!-- Optional JavaScript -->
+      <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+      
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      
+      <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+      
+      
+      <script src="../js/main.js"></script>
+      <script src="../js/data.js"></script>
+    </body>
+    </html>

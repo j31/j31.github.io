@@ -59,7 +59,7 @@ $(document).ready(function() {
     ev.answer = "";
     ev.questionNum = 0;
     ev.score = 0;
-
+    
     $('#quiz-close-btn').unbind('click');
     $('#quiz-close-btn').click(function(){
       $('#quiz').toggleClass('d-none');
@@ -190,7 +190,21 @@ $(document).ready(function() {
     // for FLASHCARDS display answer when show button is clicked
     if (ev.state === "flashcards") {
       $('#show-answer-btn').removeClass('d-none')
-      // reset onClick function to reveal answer
+      
+      
+      // on [ENTER] ...
+      $(document).unbind('keypress')
+      $(document).keypress(function(e) {
+        if(e.which == 13 && !$("#show-answer-btn").hasClass('d-none')) {
+          $('#show-answer-btn').addClass('d-none');
+          var html = '<p class="answer-text">' + ev.answer + '</p>'
+          $('.answer').html(html);
+          
+          ev.getUserAnswer();
+        }
+      });
+      
+      // on CLICK ...
       $('#show-answer-btn').unbind('click')
       $('#show-answer-btn').click(function(){
         $('#show-answer-btn').addClass('d-none');
@@ -206,15 +220,15 @@ $(document).ready(function() {
       
       var html = '<div id="answer-box1" class="quiz-answer"><div class="form-check"><input class="form-check-input" type="radio" name="quiz-answer" id="quiz-answer1" value="option1"><label class="form-check-label" for="quiz-answer1">&nbsp; 1. <span id="answer1"></span></label></div></div><div id="answer-box2" class="quiz-answer"><div class="form-check"><input class="form-check-input" type="radio" name="quiz-answer" id="quiz-answer2" value="option2"><label class="form-check-label" for="quiz-answer2">&nbsp; 2. <span id="answer2"></span></label></div></div><div id="answer-box3" class="quiz-answer"><div class="form-check"><input class="form-check-input" type="radio" name="quiz-answer" id="quiz-answer3" value="option3"><label class="form-check-label" for="quiz-answer3">&nbsp; 3.  <span id="answer3"></span></label></div></div><div id="answer-box4" class="quiz-answer"><div class="form-check"><input class="form-check-input" type="radio" name="quiz-answer" id="quiz-answer4" value="option4"><label class="form-check-label" for="quiz-answer4">&nbsp; 4.  <span id="answer4"></span></label></div></div>'
       $('.answer').html(html);
-
-
+      
+      
       //uncheck all checkboxes, clear highighting
       $('input[type="radio"]').prop('checked', false);
       $(".quiz-answer").css("background-color", "");
-
       
-
-
+      
+      
+      
       var answers = []
       
       // add correct answer to answer array
@@ -255,6 +269,37 @@ $(document).ready(function() {
   Evergreen.prototype.getUserAnswer = function () {
     $('.check-btn').removeClass('d-none');
     
+    // <==  LEFT ARROW 
+    $(document).unbind('keypress')
+    $(document).keypress(function(e) {
+      if(e.which == 119 ) {
+        if (ev.knowledgeTerm.strength === 0)
+        ev.knowledgeTerm.strength = 1;
+        else
+        ev.knowledgeTerm.strength -= 1;
+        $('.check-btn').addClass('d-none');
+        
+        ev.flashcards();
+      }
+    });
+    
+    // <==  RIGHT ARROW 
+   
+    $(document).keypress(function(e) {
+      if(e.which == 99 ) {
+        if (ev.knowledgeTerm.strength === 0)
+        ev.knowledgeTerm.strength = 2;
+        else if (ev.knowledgeTerm.strength === 5)
+        ev.knowledgeTerm.strength = 5;
+        else
+        ev.knowledgeTerm.strength += 1;
+        $('.check-btn').addClass('d-none');
+        
+        ev.flashcards();
+      }
+    });
+    
+    
     // WRONG button
     $('#wrong-btn').unbind('click');
     $('#wrong-btn').click(function(){
@@ -288,91 +333,135 @@ $(document).ready(function() {
   // Get user response on QUIZ (multiple choice)
   Evergreen.prototype.getUserChoice = function () {
     
+    
+    // IF (#)then...
+    
+    $(document).unbind('keypress')
+    $(document).keypress(function(e) {
+      if(e.which == 49) {
+        $('#quiz-answer1').prop('checked', true);
+        $("#check-answer-btn").removeClass('disabled');
+      }
+      if(e.which == 50) {
+        $('#quiz-answer2').prop('checked', true);
+        $("#check-answer-btn").removeClass('disabled');
+      }
+      if(e.which == 51) {
+        $('#quiz-answer3').prop('checked', true);
+        $("#check-answer-btn").removeClass('disabled');
+      }
+      if(e.which == 52) {
+        $('#quiz-answer4').prop('checked', true);
+        $("#check-answer-btn").removeClass('disabled');
+      }
+      if(e.which == 13 && !$("#check-answer-btn").hasClass("disabled")) {
+        ev.checkUserChoice();
+      }
+    });
+    
     // enable check-answer-btn when radio selection made
     $("input:radio").change(function () {
       $("#check-answer-btn").removeClass('disabled');
     });
     
+    // $(document).keypress(function(e) {
+    //   if(e.which == 13 && $("#check-answer-btn").prop('disabled', false ));  {
+    //     ev.checkUserChoice();
+    //   }
+    // });
+    
     //  bind correction logic to check button
     $('#check-answer-btn').click(function(){
-      
-      // determine which answer was selected
-      if ($('input[name=quiz-answer]:checked').val() === 'option1'){
-        var selection = $('#answer1').text()
-        var selectionNum = 1;
-      }
-      
-      if ($('input[name=quiz-answer]:checked').val() === 'option2'){
-        var selection = $('#answer2').text()
-        var selectionNum = 2;
-      }
-      
-      if ($('input[name=quiz-answer]:checked').val() === 'option3'){
-        var selection = $('#answer3').text()
-        var selectionNum = 3;
-      }
-      
-      if ($('input[name=quiz-answer]:checked').val() === 'option4'){
-        var selection = $('#answer4').text()
-        var selectionNum = 4;
-      }
-      
-      
-      //  Highlight correct answer
-      if ( $('#answer1').text() === ev.answer )
-      $("#answer-box1").css("background-color", "lightgreen");
-      if ( $('#answer2').text() === ev.answer )
-      $("#answer-box2").css("background-color", "lightgreen");
-      if ( $('#answer3').text() === ev.answer )
-      $("#answer-box3").css("background-color", "lightgreen");
-      if ( $('#answer4').text() === ev.answer )
-      $("#answer-box4").css("background-color", "lightgreen");
-      
-      
-      // determine if selection matches answer
-      var isCorrect = (selection === ev.answer)
-      
-      
-      // IF SELECTION is WRONG
-      if (!isCorrect) {
-        if (ev.knowledgeTerm.strength === 0)
-        ev.knowledgeTerm.strength = 1;
-        else
-        ev.knowledgeTerm.strength -= 1;
-        $('#check-answer-btn').addClass('d-none');
-        $('.incorrect').removeClass('d-none');
-      };
-      
-      // IF SELECTION is CORRECT
-      if (isCorrect) {
-        if (ev.knowledgeTerm.strength === 0)
-        ev.knowledgeTerm.strength = 3;
-        else if (ev.knowledgeTerm.strength === 5)
-        ev.knowledgeTerm.strength = 5;
-        else
-        ev.knowledgeTerm.strength += 1;
-        $('#check-answer-btn').addClass('d-none');
-        $('.correct').removeClass('d-none');
-      }; 
-      
-      
-      //  bind correction logic to check button
-      $('#continue-quiz-btn').removeClass('d-none');
-      
-      $('#continue-quiz-btn').unbind('click')
-      $('#continue-quiz-btn').click(function(){
-        
+      ev.checkUserChoice(); 
+    });
+  }
+  
+  
+  Evergreen.prototype.checkUserChoice = function () {
+    // determine which answer was selected
+    if ($('input[name=quiz-answer]:checked').val() === 'option1'){
+      var selection = $('#answer1').text()
+      var selectionNum = 1;
+    }
+    
+    if ($('input[name=quiz-answer]:checked').val() === 'option2'){
+      var selection = $('#answer2').text()
+      var selectionNum = 2;
+    }
+    
+    if ($('input[name=quiz-answer]:checked').val() === 'option3'){
+      var selection = $('#answer3').text()
+      var selectionNum = 3;
+    }
+    
+    if ($('input[name=quiz-answer]:checked').val() === 'option4'){
+      var selection = $('#answer4').text()
+      var selectionNum = 4;
+    }
+    
+    
+    //  Highlight correct answer
+    if ( $('#answer1').text() === ev.answer )
+    $("#answer-box1").css("background-color", "lightgreen");
+    if ( $('#answer2').text() === ev.answer )
+    $("#answer-box2").css("background-color", "lightgreen");
+    if ( $('#answer3').text() === ev.answer )
+    $("#answer-box3").css("background-color", "lightgreen");
+    if ( $('#answer4').text() === ev.answer )
+    $("#answer-box4").css("background-color", "lightgreen");
+    
+    
+    // determine if selection matches answer
+    var isCorrect = (selection === ev.answer)
+    
+    
+    // IF SELECTION is WRONG
+    if (!isCorrect) {
+      if (ev.knowledgeTerm.strength === 0)
+      ev.knowledgeTerm.strength = 1;
+      else
+      ev.knowledgeTerm.strength -= 1;
+      $('#check-answer-btn').addClass('d-none');
+      $('.incorrect').removeClass('d-none');
+    };
+    
+    // IF SELECTION is CORRECT
+    if (isCorrect) {
+      if (ev.knowledgeTerm.strength === 0)
+      ev.knowledgeTerm.strength = 3;
+      else if (ev.knowledgeTerm.strength === 5)
+      ev.knowledgeTerm.strength = 5;
+      else
+      ev.knowledgeTerm.strength += 1;
+      $('#check-answer-btn').addClass('d-none');
+      $('.correct').removeClass('d-none');
+    }; 
+    
+    
+    //  bind correction logic to check button & to [ENTER]
+    $('#continue-quiz-btn').removeClass('d-none');
+    
+    // IF [ENTER]  then...
+    
+    $(document).unbind('keypress')
+    $(document).keypress(function(e) {
+      if(e.which == 13 && !$("#continue-quiz-btn").hasClass("d-none")) {
         $('#continue-quiz-btn').addClass('d-none');
         $('.correct').addClass('d-none');
         $('.incorrect').addClass('d-none');
-        
-        
         ev.quiz();
-      })
-      
+      }
     });
     
-    
+    // IF CLICK  then...
+    $('#continue-quiz-btn').unbind('click')
+    $('#continue-quiz-btn').click(function(){
+      
+      $('#continue-quiz-btn').addClass('d-none');
+      $('.correct').addClass('d-none');
+      $('.incorrect').addClass('d-none');
+      ev.quiz();
+    })
   }
   
   
@@ -393,10 +482,10 @@ $(document).ready(function() {
       $('.continue-btn').addClass('d-none')
       $('#home-menu').toggleClass('d-none');
       $('#navigation').toggleClass('d-none');
-
+      
       if (ev.state === "flashcards")
       $('#flash-cards').toggleClass('d-none');
-
+      
       if (ev.state === "quiz")
       $('#quiz').toggleClass('d-none');
       ev.homeMenu()
@@ -416,6 +505,9 @@ $(document).ready(function() {
   
   // Start main app
   ev.homeMenu();
+  
+  
+  
   
 });
 

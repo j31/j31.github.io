@@ -87,12 +87,108 @@
           <div class="col-md-4 mx-auto">
             <a id="flash-cards-btn" class="btn btn-success btn-xl game-btn"  href="#">FLASH CARDS</a><br>
             <a id="quiz-btn" class="btn btn-success btn-xl game-btn" href="#">QUIZ PRACTICE</a><br>
-            <a id="play-game-btn" class="btn btn-success btn-xl game-btn disabled" href="#">PLAY GAME</a><br>
+            <a id="game-btn" class="btn btn-success btn-xl game-btn" href="#">PLAY GAME</a><br>
           </div>
         </div>
       </div>
     </section>
     
+
+
+
+     <!--
+      GAME SECTION ################################################################
+    -->
+    <section id="game" class="d-none">
+        <br><br>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-9 text-right">
+              <a id="game-close-btn" class="btn btn-outline-secondary btn-sm" href="#">Close</a>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 mx-auto">
+              <br>
+              <div class="progress" style="height:10px"></div>
+              <br>
+              <div class="question"></div><hr>
+              
+              <div class="g-answer">
+                <div id="game-answer-box1" class="game-answer">
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="game-answer" id="game-answer1" value="option1">
+                    <label class="form-check-label" for="game-answer1">
+                      
+                      &nbsp; 1. <span id="g-answer1"></span>
+                      
+                    </label>
+                  </div>
+                </div>
+                
+                <div id="game-answer-box2" class="game-answer">
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="game-answer" id="game-answer2" value="option2">
+                    <label class="form-check-label" for="game-answer2">
+                      
+                      &nbsp; 2. <span id="g-answer2"></span>
+                      
+                    </label>
+                  </div>
+                </div>
+                
+                <div id="game-answer-box3" class="game-answer">
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="game-answer" id="game-answer3" value="option3">
+                    <label class="form-check-label" for="game-answer3">
+                      &nbsp; 3.  <span id="g-answer3"></span>
+                    </label>
+                  </div>
+                </div>
+                
+                <div id="game-answer-box4" class="game-answer">
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="game-answer" id="game-answer4" value="option4">
+                    <label class="form-check-label" for="game-answer4">
+                      &nbsp; 4.  <span id="g-answer4"></span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+              
+              <br>
+              <div class="text-center">
+                <a id="game-check-answer-btn" class="btn btn-outline-success btn-xl game-btn disabled" href="#">Check Answer</a>
+              </div>
+              
+              
+              <div class="row">
+                <div class="col-md-6 mx-auto">
+                  
+                  <div class="correct d-none text-center">
+                    <i class="fas fa-check-circle fa-4x"></i>
+                  </div>
+                  <div class="incorrect d-none text-center">
+                    <i class="fas fa-times-circle fa-4x"></i>
+                  </div>
+                  
+                </div> 
+                <div class="col-md-6 mx-auto">
+                  <a id="continue-game-btn" class="btn btn-outline-success btn-xl game-btn d-none"  href="#">Continue</a><br>
+                  <a class="continue-btn btn btn-outline-success btn-xl game-btn d-none"  href="#">Continue</a><br>
+                </div>
+              </div>
+  
+            </div>
+            
+          </div>
+        </div>
+      </section>
+    
+      
+
+
+
     <!--
       QUIZ SECTION ################################################################
     -->
@@ -107,7 +203,7 @@
         <div class="row">
           <div class="col-md-6 mx-auto">
             <br>
-            <div class="progress"></div>
+            <div class="progress" style="height:10px"></div>
             <br>
             <div class="question"></div><hr>
             
@@ -160,7 +256,7 @@
             
             
             <div class="row">
-              <div class="col-md-3 mx-auto">
+              <div class="col-md-6 mx-auto">
                 
                 <div class="correct d-none text-center">
                   <i class="fas fa-check-circle fa-4x"></i>
@@ -170,11 +266,12 @@
                 </div>
                 
               </div> 
-              <div class="col-md-3 mx-auto">
-                <a id="continue-quiz-btn" class="btn btn-outline-success btn-xl game-btn d-none"  href="#">CONTINUE</a><br>
-                <a class="continue-btn btn btn-success btn-xl game-btn d-none"  href="#">CONTINUE</a><br>
+              <div class="col-md-6 mx-auto">
+                <a id="continue-quiz-btn" class="btn btn-outline-success btn-xl game-btn d-none"  href="#">Continue</a><br>
+                <a class="continue-btn btn btn-outline-success btn-xl game-btn d-none"  href="#">Continue</a><br>
               </div>
             </div>
+
           </div>
           
         </div>
@@ -196,7 +293,7 @@
         <div class="row">
           <div class="col-md-6 mx-auto">
             <br>
-            <div class="progress"></div>
+            <div class="progress" style="height:10px"></div>
             <br>
             <div class="question"></div><hr>
             <div class="answer"></div>
@@ -205,10 +302,10 @@
             </div>
             
             <div class="check-btn text-center">
-              <a id="wrong-btn" class="btn btn-danger btn-xl game-btn" href="#">Wrong</a>
-              <a id="correct-btn" class="btn btn-success btn-xl game-btn" href="#">Correct</a>
+              <a id="wrong-btn" class="btn btn-outline-danger btn-xl game-btn" href="#">Wrong</a>
+              <a id="correct-btn" class="btn btn-outline-success btn-xl game-btn" href="#">Correct</a>
             </div>
-            <a class="continue-btn btn btn-success btn-xl game-btn d-none"  href="#">CONTINUE</a><br>
+            <a class="continue-btn btn btn-outline-success btn-xl game-btn d-none"  href="#">Continue</a><br>
             
           </div>
         </div>
@@ -217,6 +314,7 @@
     
     <footer>
       <div class="container">
+        <br>
         <p>&copy; 2018 Evergreen</p>
       </div>
     </footer>

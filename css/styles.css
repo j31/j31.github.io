@@ -64,7 +64,7 @@ h1 {
   font-size: 1.3rem;
 }
 
-.quiz-answer {
+.quiz-answer, .game-answer {
   border-bottom: 1px solid lightgrey;
   padding: 5px 5px;
   margin-bottom: 5px;

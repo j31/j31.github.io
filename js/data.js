@@ -111,7 +111,7 @@ var dictionary = [
  
  // Seed data for user knowlege
  var knowledge = [
-   { "termId": 1,   strength: 0 },
+   { termId: 1,   strength: 0 },
    { termId: 2,   strength: 0 },
    { termId: 3,   strength: 0 },
    { termId: 4,   strength: 0 },

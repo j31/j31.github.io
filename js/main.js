@@ -3,10 +3,6 @@ $(document).ready(function() {
 
 ///// START OF DATA
 
-
-
-
-
   // Test dictionary
   var dictionary = [
 
@@ -174,8 +170,6 @@ $(document).ready(function() {
      { termId: 52,   strength: 0 },
      { termId: 53,   strength: 0 }
    ];  
-  
-
 
 ///// END OF DATA
   
@@ -267,6 +261,8 @@ $(document).ready(function() {
       $('#game').toggleClass('d-none');
       $('#home-menu').toggleClass('d-none');
       $('#navigation').toggleClass('d-none');
+      $('.correct').addClass('d-none');
+      $('.wrong').addClass('d-none');      
       ev.updateScore();
     });
     

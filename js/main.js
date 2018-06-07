@@ -637,10 +637,11 @@ $(document).ready(function() {
       if(e.which == 119 ) {
         if (ev.knowledgeTerm.strength === 0)
         ev.knowledgeTerm.strength = 1;
-        else
-        ev.knowledgeTerm.strength -= 1;
-        $('.check-btn').addClass('d-none');
+        else {
+          ev.knowledgeTerm.strength -= 1;
+        }
         
+        $('.check-btn').addClass('d-none');
         ev.flashcards();
       }
     });
@@ -652,12 +653,12 @@ $(document).ready(function() {
         ev.knowledgeTerm.strength = 2;
         else if (ev.knowledgeTerm.strength === 5)
         ev.knowledgeTerm.strength = 5;
-        else
-        ev.knowledgeTerm.strength += 1;
+        else {
+          ev.knowledgeTerm.strength += 1;
+        }
+        
         $('.check-btn').addClass('d-none');
-        
         ev.gameScore++;
-        
         ev.flashcards();
       }
     });
@@ -668,10 +669,10 @@ $(document).ready(function() {
     $('#wrong-btn').click(function(){
       if (ev.knowledgeTerm.strength === 0)
       ev.knowledgeTerm.strength = 1;
-      else
-      ev.knowledgeTerm.strength -= 1;
+      else {
+        ev.knowledgeTerm.strength -= 1;
+      }
       $('.check-btn').addClass('d-none');
-      
       ev.flashcards();
     });
     
@@ -682,10 +683,10 @@ $(document).ready(function() {
       ev.knowledgeTerm.strength = 2;
       else if (ev.knowledgeTerm.strength === 5)
       ev.knowledgeTerm.strength = 5;
-      else
-      ev.knowledgeTerm.strength += 1;
+      else {
+        ev.knowledgeTerm.strength += 1;
+      }
       $('.check-btn').addClass('d-none');
-      
       ev.gameScore++;
       
       ev.flashcards();
@@ -734,13 +735,14 @@ $(document).ready(function() {
     
     
     //  bind correction logic to check button
+    $('#check-answer-btn').unbind(click)
     $('#check-answer-btn').click(function(){
       ev.checkUserChoice(); 
     });
   }
   
   
-  // Get user Answer on GAME (multiple choice)
+  // Get GAME User Choice (multiple choice)
   Evergreen.prototype.getGameUserChoice = function () {
     
     //uncheck all checkboxes, clear highighting
@@ -779,11 +781,13 @@ $(document).ready(function() {
     
     
     //  bind correction logic to check button
+    $('#game-check-btn').unbind('click')
     $('#game-check-btn').click(function(){
       ev.checkGameUserChoice(); 
     });
     
     //  listen on SKIP QUESTION button
+    $('#game-skip-btn').unbind('click')
     $('#game-skip-btn').click(function(){
       ev.getQuestion();
     });

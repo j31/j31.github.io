@@ -380,17 +380,19 @@ $(document).ready(function() {
   Evergreen.prototype.updateScore = function () {
     
     
-    // // localStorage Feature detect + local reference
-    // var storage;
-    // var fail;
-    // var uid;
-    // try {
-    //   uid = new Date;
-    //   (storage = window.localStorage).setItem(uid, uid);
-    //   fail = storage.getItem(uid) != uid;
-    //   storage.removeItem(uid);
-    //   fail && (storage = false);
-    // } catch (exception) {}
+    // localStorage Feature detect + local reference
+    var storage;
+    var fail;
+    var uid;
+    try {
+      uid = new Date;
+      (storage = window.localStorage).setItem(uid, uid);
+      fail = storage.getItem(uid) != uid;
+      storage.removeItem(uid);
+      fail && (storage = false);
+    } catch (exception) {}
+
+    console.log(storage)
     
     // if (storage) {
     //   //SAVE user knowledge to local storage
@@ -402,9 +404,6 @@ $(document).ready(function() {
     // }
     
     
-    
-    
-    console.log(ev.user.knowledge)
     
     // find sum of user strength scores
     var userStrength = ev.user.knowledge.reduce((a,b) => a + b.strength, 0);

@@ -392,16 +392,16 @@ $(document).ready(function() {
       fail && (storage = false);
     } catch (exception) {}
 
-    console.log(storage)
+    console.log("trying to save")
     
-    // if (storage) {
-    //   //SAVE user knowledge to local storage
-    //   for (var i=0; i<ev.user.knowledge.length ; i++) {
-    //     var id = ev.user.knowledge[i].termId
-    //     var score = ev.user.knowledge[i].strength
-    //     localStorage.setItem(id, score);
-    //   }
-    // }
+    if (storage) {
+      //SAVE user knowledge to local storage
+      for (var i=0; i<ev.user.knowledge.length ; i++) {
+        var id = ev.user.knowledge[i].termId
+        var score = ev.user.knowledge[i].strength
+        localStorage.setItem(id, score);
+      }
+    }
     
     
     

@@ -22,6 +22,9 @@ $(document).ready(function() {
     this.question = "";
     this.answer = "";
     this.questionNum = 0;
+    this.gameClock = 0;
+    this.gameScore = 0;
+    this.intervalId = 0;
   };
   
   //  Instantiate Evergreen session object
@@ -31,12 +34,13 @@ $(document).ready(function() {
   
   //  Listen on home-menu buttons (Flashcards...)
   Evergreen.prototype.homeMenu = function () {
-    ev.updateScore()
+    ev.state = "home"
+    ev.updateScore();
     $('#flash-cards-btn').unbind('click');
     $('#flash-cards-btn').click(function(){
       $('#home-menu').toggleClass('d-none')
       $('#navigation').toggleClass('d-none')
-      ev.initFlashcards () 
+      ev.initFlashcards();
       ev.flashcards();
     });
     
@@ -44,7 +48,7 @@ $(document).ready(function() {
     $('#quiz-btn').click(function(){
       $('#home-menu').toggleClass('d-none')
       $('#navigation').toggleClass('d-none')
-      ev.initQuiz () 
+      ev.initQuiz();
       ev.quiz();
     });
     
@@ -52,8 +56,8 @@ $(document).ready(function() {
     $('#game-btn').click(function(){
       $('#home-menu').toggleClass('d-none')
       $('#navigation').toggleClass('d-none')
-      ev.initGame () 
-      ev.game();
+      ev.initGame();
+      // game called from initGame
     });
     
   }
@@ -68,27 +72,71 @@ $(document).ready(function() {
     ev.answer = "";
     ev.questionNum = 0;
     ev.score = 0;
+    ev.gameClock = 30;
+    ev.gameScore = 0;
+    
+    
+    // clear screen except for start button
+    $('.g-answer').addClass('d-none');
+    $('#game-skip-btn').addClass('d-none');
+    $('#game-check-btn').addClass('d-none');
+    $('#game-start-btn').removeClass('d-none');
+    
     
     $('#game-close-btn').unbind('click');
     $('#game-close-btn').click(function(){
+      clearInterval(ev.intervalId);
       $('#game').toggleClass('d-none');
       $('#home-menu').toggleClass('d-none');
       $('#navigation').toggleClass('d-none');
       ev.updateScore();
     });
+    
+    // don't show empty answers
+    $('.g-answer').addClass('d-none');
+    $('#game-start-btn').removeClass('d-none');
+    
+    $('#game-start-btn').unbind('click');
+    $('#game-start-btn').click(function(){
+      $('.g-answer').removeClass('d-none');
+      $('#game-start-btn').addClass('d-none');
+      $('#game-skip-btn').removeClass('d-none');
+      $('#game-check-btn').removeClass('d-none');
+      ev.gameTimer();
+      ev.game();
+    });
   }
   
   //  Game 
   Evergreen.prototype.game = function () {
-    if (ev.questionNum < 10) {
-      $('#game-check-answer-btn').removeClass('d-none');
-      $("#game-check-answer-btn").addClass('disabled');
+    
+    if (ev.gameClock > 0) {
+      $('#game-check-btn').removeClass('d-none');
+      $("#game-check-btn").addClass('disabled');
       ev.getQuestion();
     } else {
       ev.showResults();
     }
   }
   
+  Evergreen.prototype.gameTimer = function () {
+    ev.intervalId = setInterval(function() { 
+      ev.gameClock -= 1
+      if (ev.gameClock <= 0) {
+        clearInterval(ev.intervalId);
+        ev.gameOver();
+      }
+      
+      var display = (ev.gameClock < 10 ? ":0" + ev.gameClock : ":" + ev.gameClock)
+      $('#game-clock').text(display);
+      document.getElementById("click").play()
+    }, 1000);
+  }
+  
+  Evergreen.prototype.gameOver = function () {
+    document.getElementById("buzzer").play()
+    ev.showResults();
+  }
   
   
   //  Init Quiz
@@ -100,6 +148,7 @@ $(document).ready(function() {
     ev.answer = "";
     ev.questionNum = 0;
     ev.score = 0;
+    ev.gameScore = 0;
     
     $('#quiz-close-btn').unbind('click');
     $('#quiz-close-btn').click(function(){
@@ -132,6 +181,7 @@ $(document).ready(function() {
     ev.answer = "";
     ev.questionNum = 0;
     ev.score = 0;
+    ev.gameScore = 0;
     
     $('#close-btn').unbind('click');
     $('#close-btn').click(function(){
@@ -183,10 +233,13 @@ $(document).ready(function() {
     var term = undefined;
     while (!term) {
       var term = ev.user.knowledge.find(function(t) {
-        return t.strength === i;
+        return (t.strength === i && t.lastTime === undefined);
       });
       i++
     }
+    
+    // set timestamp on Knowledge object (for SKIP in game)
+    term.lastTime = Date.now();
     
     //  store user knoweldge term into ev Class object
     ev.knowledgeTerm = term;
@@ -203,6 +256,11 @@ $(document).ready(function() {
     //  Increment count number
     ev.questionNum += 1;
     
+    
+    // if GAME skip progress bar
+    if (ev.state === "game")
+    ev.displayQuestion();
+    else
     ev.updateProgress();
   }
   
@@ -265,7 +323,7 @@ $(document).ready(function() {
       });
     } 
     
-    // for QUIZ display multiple choice answers
+    // // Reveal Answer(s) for QUIZ display multiple choice answers
     if (ev.state === "quiz" ) {
       
       var html = '<div id="answer-box1" class="quiz-answer"><div class="form-check"><input class="form-check-input" type="radio" name="quiz-answer" id="quiz-answer1" value="option1"><label class="form-check-label" for="quiz-answer1">&nbsp; 1. <span id="answer1"></span></label></div></div><div id="answer-box2" class="quiz-answer"><div class="form-check"><input class="form-check-input" type="radio" name="quiz-answer" id="quiz-answer2" value="option2"><label class="form-check-label" for="quiz-answer2">&nbsp; 2. <span id="answer2"></span></label></div></div><div id="answer-box3" class="quiz-answer"><div class="form-check"><input class="form-check-input" type="radio" name="quiz-answer" id="quiz-answer3" value="option3"><label class="form-check-label" for="quiz-answer3">&nbsp; 3.  <span id="answer3"></span></label></div></div><div id="answer-box4" class="quiz-answer"><div class="form-check"><input class="form-check-input" type="radio" name="quiz-answer" id="quiz-answer4" value="option4"><label class="form-check-label" for="quiz-answer4">&nbsp; 4.  <span id="answer4"></span></label></div></div>'
@@ -314,8 +372,8 @@ $(document).ready(function() {
       ev.getUserChoice();
     }
     
-
-    // for GAME display multiple choice answers
+    
+    // // Reveal Answer(s) for GAME display multiple choice answers
     if (ev.state === "game" ) {
       
       var html = '<div id="game-answer-box1" class="game-answer"><div class="form-check"><input class="form-check-input" type="radio" name="game-answer" id="game-answer1" value="option1"><label class="form-check-label" for="game-answer1">&nbsp; 1. <span id="g-answer1"></span></label></div></div><div id="game-answer-box2" class="game-answer"><div class="form-check"><input class="form-check-input" type="radio" name="game-answer" id="game-answer2" value="option2"><label class="form-check-label" for="game-answer2">&nbsp; 2. <span id="g-answer2"></span></label></div></div><div id="game-answer-box3" class="game-answer"><div class="form-check"><input class="form-check-input" type="radio" name="game-answer" id="game-answer3" value="option3"><label class="form-check-label" for="game-answer3">&nbsp; 3. <span id="g-answer3"></span></label></div></div><div id="game-answer-box4" class="game-answer"><div class="form-check"><input class="form-check-input" type="radio" name="game-answer" id="game-answer4" value="option4"><label class="form-check-label" for="game-answer4">&nbsp; 4. <span id="g-answer4"></span></label></div></div>'
@@ -353,7 +411,7 @@ $(document).ready(function() {
         answers.push(term.def)
       }
       
-
+      
       
       // FOR GAME display answers in random order on page
       for (var x=1; x<=4; x++) {
@@ -367,7 +425,9 @@ $(document).ready(function() {
   }
   
   
-  // Get user response on FLASHCARDS (wrong/correct buttons)
+  
+  
+  // Get User Answer on FLASHCARDS (wrong/correct buttons)
   Evergreen.prototype.getUserAnswer = function () {
     $('.check-btn').removeClass('d-none');
     
@@ -395,6 +455,8 @@ $(document).ready(function() {
         else
         ev.knowledgeTerm.strength += 1;
         $('.check-btn').addClass('d-none');
+        
+        ev.gameScore += 1;
         
         ev.flashcards();
       }
@@ -424,6 +486,8 @@ $(document).ready(function() {
       ev.knowledgeTerm.strength += 1;
       $('.check-btn').addClass('d-none');
       
+      ev.gameScore += 1;
+      
       ev.flashcards();
     }); 
   }
@@ -431,9 +495,12 @@ $(document).ready(function() {
   
   
   
-  // Get user response on QUIZ (multiple choice)
+  // Get user Answer on QUIZ (multiple choice)
   Evergreen.prototype.getUserChoice = function () {
     
+    //uncheck all checkboxes, clear highighting
+    $('input[type="radio"]').prop('checked', false);
+    $(".quiz-answer").css("background-color", "");
     
     // IF (#)then...
     
@@ -471,51 +538,59 @@ $(document).ready(function() {
       ev.checkUserChoice(); 
     });
   }
-
-
-  // Get user response on GAME (multiple choice)
+  
+  
+  // Get user Answer on GAME (multiple choice)
   Evergreen.prototype.getGameUserChoice = function () {
     
+    //uncheck all checkboxes, clear highighting
+    $('input[type="radio"]').prop('checked', false);
+    $(".g-answer").css("background-color", "");
     
+
     // IF (#)then...
-    
     $(document).unbind('keypress')
     $(document).keypress(function(e) {
       if(e.which == 49) {
         $('#game-answer1').prop('checked', true);
-        $("#game-check-answer-btn").removeClass('disabled');
+        $("#game-check-btn").removeClass('disabled');
       }
       if(e.which == 50) {
         $('#game-answer2').prop('checked', true);
-        $("#game-check-answer-btn").removeClass('disabled');
+        $("#game-check-btn").removeClass('disabled');
       }
       if(e.which == 51) {
         $('#game-answer3').prop('checked', true);
-        $("#game-check-answer-btn").removeClass('disabled');
+        $("#game-check-btn").removeClass('disabled');
       }
       if(e.which == 52) {
         $('#game-answer4').prop('checked', true);
-        $("#game-check-answer-btn").removeClass('disabled');
+        $("#game-check-btn").removeClass('disabled');
       }
-      if(e.which == 13 && !$("#game-check-answer-btn").hasClass("disabled")) {
+      if(e.which == 13 && !$("#game-check-btn").hasClass("disabled")) {
         ev.checkGameUserChoice();
       }
     });
     
     // enable check-answer-btn when radio selection made
     $("input:radio").change(function () {
-      $("#game-check-answer-btn").removeClass('disabled');
+      $("#game-check-btn").removeClass('disabled');
     });
     
     
     //  bind correction logic to check button
-    $('#game-check-answer-btn').click(function(){
+    $('#game-check-btn').click(function(){
       ev.checkGameUserChoice(); 
     });
+    
+    //  listen on SKIP QUESTION button
+    $('#game-skip-btn').click(function(){
+      ev.getQuestion();
+    });
   }
-
-
-
+  
+  
+  
   
   //  CHECK USER CHOICE FOR QUIZ
   Evergreen.prototype.checkUserChoice = function () {
@@ -558,6 +633,11 @@ $(document).ready(function() {
     
     // IF SELECTION is WRONG
     if (!isCorrect) {
+      
+      // PLAY "wrong" Sound
+      document.getElementById("wrong").play()
+      
+      
       if (ev.knowledgeTerm.strength === 0)
       ev.knowledgeTerm.strength = 1;
       else
@@ -568,6 +648,14 @@ $(document).ready(function() {
     
     // IF SELECTION is CORRECT
     if (isCorrect) {
+      
+      // PLAY "correct" Sound
+      document.getElementById("correct").play()
+      
+      // Increment Game Score
+      ev.gameScore += 1;
+      
+      
       if (ev.knowledgeTerm.strength === 0)
       ev.knowledgeTerm.strength = 3;
       else if (ev.knowledgeTerm.strength === 5)
@@ -583,7 +671,6 @@ $(document).ready(function() {
     $('#continue-quiz-btn').removeClass('d-none');
     
     // IF [ENTER]  then...
-    
     $(document).unbind('keypress')
     $(document).keypress(function(e) {
       if(e.which == 13 && !$("#continue-quiz-btn").hasClass("d-none")) {
@@ -605,11 +692,12 @@ $(document).ready(function() {
     })
   }
   
-
-
-
+  
+  
   //  CHECK USER CHOICE FOR GAME
   Evergreen.prototype.checkGameUserChoice = function () {
+    
+    
     // determine which answer was selected
     if ($('input[name=game-answer]:checked').val() === 'option1'){
       var selection = $('#g-answer1').text()
@@ -645,27 +733,47 @@ $(document).ready(function() {
     
     // determine if selection matches answer
     var isCorrect = (selection === ev.answer)
-   
+    
     
     // IF SELECTION is WRONG
     if (!isCorrect) {
+      
+      // PLAY "wrong" Sound
+      document.getElementById("wrong").play()
+      
       if (ev.knowledgeTerm.strength === 0)
       ev.knowledgeTerm.strength = 1;
       else
       ev.knowledgeTerm.strength -= 1;
-      $('#game-check-answer-btn').addClass('d-none');
+      $('#game-check-btn').addClass('d-none');
+      $('#game-skip-btn').addClass('d-none');
       $('.incorrect').removeClass('d-none');
     };
     
     // IF SELECTION is CORRECT
     if (isCorrect) {
+      
+      // Play "correct" sound
+      document.getElementById("correct").play();
+      
+      // Update game score
+      ev.gameScore += 1;
+      console.log(ev.gameScore);
+      $('#game-score').text(ev.gameScore);
+      
+      
+      // Add Bonus Time to gameClock
+      // ev.gameClock += 5;
+      
+      
       if (ev.knowledgeTerm.strength === 0)
       ev.knowledgeTerm.strength = 3;
       else if (ev.knowledgeTerm.strength === 5)
       ev.knowledgeTerm.strength = 5;
       else
       ev.knowledgeTerm.strength += 1;
-      $('#game-check-answer-btn').addClass('d-none');
+      $('#game-check-btn').addClass('d-none');
+      $('#game-skip-btn').addClass('d-none');
       $('.correct').removeClass('d-none');
     }; 
     
@@ -674,11 +782,11 @@ $(document).ready(function() {
     $('#continue-game-btn').removeClass('d-none');
     
     // IF [ENTER]  then...
-    
     $(document).unbind('keypress')
     $(document).keypress(function(e) {
       if(e.which == 13 && !$("#continue-game-btn").hasClass("d-none")) {
         $('#continue-game-btn').addClass('d-none');
+        $('#game-skip-btn').removeClass('d-none');
         $('.correct').addClass('d-none');
         $('.incorrect').addClass('d-none');
         ev.game();
@@ -688,19 +796,37 @@ $(document).ready(function() {
     // IF CLICK  then...
     $('#continue-game-btn').unbind('click')
     $('#continue-game-btn').click(function(){
-      
       $('#continue-game-btn').addClass('d-none');
+      $('#game-skip-btn').removeClass('d-none');
       $('.correct').addClass('d-none');
       $('.incorrect').addClass('d-none');
       ev.game();
     })
   }
-
-
-
+  
+  
+  
   
   Evergreen.prototype.showResults = function () {
-    $('#close-btn').addClass('d-none')
+    
+    if (ev.state === "flashcards" || ev.state === "quiz" ) {
+      $('#close-btn').addClass('d-none');
+      $('.correct').addClass('d-none')
+      $('.wrong').addClass('d-none')
+      $('.answer').addClass('d-none')
+    }
+    
+    
+    if (ev.state === "game") {
+      $('#game-close-btn').addClass('d-none');
+      $('#game-skip-btn').addClass('d-none')
+      $('#game-check-btn').addClass('d-none')
+      $('.correct').addClass('d-none')
+      $('.wrong').addClass('d-none')
+      $('.g-answer').addClass('d-none')
+    }
+    
+    
     $('.continue-btn').removeClass('d-none')
     $('.answer').html("");
     
@@ -709,7 +835,21 @@ $(document).ready(function() {
     $('.progress').html(html);
     ev.updateScore()
     
-    $('.question').html('<h3>Your new score is ' + ev.score + '%!</h3>')
+    if (ev.state === "flashcards") {
+      var html = '<h1>Results...</h1><br><h3>You answered ' + ev.gameScore + ' correctly.</h3><h4>Your new Evergreen score is ' + ev.score + '%</h4>'
+      $('.question').html(html);
+    }
+    
+    if (ev.state === "quiz") {
+      var html = '<h1>Quiz result</h1><br><h3>You answered ' + ev.gameScore + ' correctly.</h3><h4>Your new Evergreen score is ' + ev.score + '%</h4>'
+      $('.question').html(html);
+    }
+    
+    if (ev.state === "game") {
+      var html = '<h1>Game over</h1><br><h3>You answered ' + ev.gameScore + ' correctly.</h3><h4>Your new Evergreen score is ' + ev.score + '%</h4>'
+      $('.question').html(html);
+    }
+    
     
     // ON [ENTER]....
     $(document).unbind('keypress')
@@ -724,12 +864,13 @@ $(document).ready(function() {
         
         if (ev.state === "quiz")
         $('#quiz').toggleClass('d-none');
-
+        
         if (ev.state === "game")
         $('#game').toggleClass('d-none');
-
-
-        ev.homeMenu()
+        
+        
+        // ev.homeMenu()
+        ev.updateScore();
       }
     });
     
@@ -746,11 +887,13 @@ $(document).ready(function() {
       
       if (ev.state === "quiz")
       $('#quiz').toggleClass('d-none');
-
+      
       if (ev.state === "game")
       $('#game').toggleClass('d-none');
-
-      ev.homeMenu()
+      
+      // ev.homeMenu()
+      ev.state = "home"
+      ev.updateScore();
     });
   }
   
@@ -777,6 +920,7 @@ $(document).ready(function() {
     
   }
   // Start main app
+  // ev.state = "home"
   ev.homeMenu();
   
 });

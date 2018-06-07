@@ -79,6 +79,14 @@ h1 {
   color: #0E7E1266; 
 }
 
+.fa-check-circle {
+  color: lightgreen;
+}
+
+.fa-times-circle {
+  color: red;
+}
+
 #nav-links {
   margin-right: 20px;
 }
@@ -87,3 +95,18 @@ h1 {
   text-align: left;
   padding-left: 2px;
 }
+
+#game-score {
+  font-family: monospace;
+  background-color: lightgreen;
+  margin-right: 40px;
+  padding: 5px 20px;
+}
+
+#game-clock {
+  font-family: monospace;
+  background-color: lightgreen;
+  margin-right: 40px;
+  padding: 5px;
+}
+

@@ -205,13 +205,18 @@ $(document).ready(function() {
   // Update score (on home page)
   Evergreen.prototype.updateScore = function () {
     
-    //SAVE user knowledge to local storage
-    for (var i=0; i<ev.user.knowledge.length ; i++) {
-      var id = ev.user.knowledge[i].termId
-      var score = ev.user.knowledge[i].strength
-      localStorage.setItem(id, score);
-      
-    }
+    // Check for local storage support
+    if (typeof(Storage) !== "undefined") {
+      //SAVE user knowledge to local storage
+      for (var i=0; i<ev.user.knowledge.length ; i++) {
+        var id = ev.user.knowledge[i].termId
+        var score = ev.user.knowledge[i].strength
+        localStorage.setItem(id, score);
+      }
+    } 
+    
+    
+    
     
     
     // find sum of user strength scores
@@ -547,7 +552,7 @@ $(document).ready(function() {
     $('input[type="radio"]').prop('checked', false);
     $(".g-answer").css("background-color", "");
     
-
+    
     // IF (#)then...
     $(document).unbind('keypress')
     $(document).keypress(function(e) {
@@ -899,26 +904,32 @@ $(document).ready(function() {
   
   $('#reset-btn').unbind('click');
   $('#reset-btn').click(function(){
-    //SAVE user knowledge to local storage
-    for (var i=0; i<ev.user.knowledge.length ; i++) {
-      var id = i+1
-      var score = 0
-      localStorage.setItem(id, score);
-      
+    
+    // Check for local storage support
+    if (typeof(Storage) !== "undefined") {
+      //SAVE user knowledge to local storage
+      for (var i=0; i<ev.user.knowledge.length ; i++) {
+        var id = i+1
+        var score = 0
+        localStorage.setItem(id, score);
+      }
     }
   });
   
   
   
   
-  
-  //LOAD user knowledge from local storage
-  for (var i=1; i<ev.user.knowledge.length+1; i++)  {
-    var score = parseFloat(localStorage.getItem(i))
-    ev.user.knowledge[i-1].termId = i
-    ev.user.knowledge[i-1].strength = score
-    
+  // Check for local storage support
+  if (typeof(Storage) !== "undefined") {
+    //LOAD user knowledge from local storage
+    for (var i=1; i<ev.user.knowledge.length+1; i++)  {
+      var score = parseFloat(localStorage.getItem(i))
+      ev.user.knowledge[i-1].termId = i
+      ev.user.knowledge[i-1].strength = score
+    }
   }
+  
+  
   // Start main app
   // ev.state = "home"
   ev.homeMenu();

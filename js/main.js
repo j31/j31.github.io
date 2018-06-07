@@ -205,15 +205,28 @@ $(document).ready(function() {
   // Update score (on home page)
   Evergreen.prototype.updateScore = function () {
     
-    // Check for local storage support
-    if (typeof(Storage) !== "undefined") {
+    
+    // localStorage Feature detect + local reference
+    var storage;
+    var fail;
+    var uid;
+    try {
+      uid = new Date;
+      (storage = window.localStorage).setItem(uid, uid);
+      fail = storage.getItem(uid) != uid;
+      storage.removeItem(uid);
+      fail && (storage = false);
+    } catch (exception) {}
+    
+    if (storage) {
       //SAVE user knowledge to local storage
       for (var i=0; i<ev.user.knowledge.length ; i++) {
         var id = ev.user.knowledge[i].termId
         var score = ev.user.knowledge[i].strength
         localStorage.setItem(id, score);
       }
-    } 
+    }
+    
     
     
     
@@ -902,11 +915,24 @@ $(document).ready(function() {
     });
   }
   
+
+  //  Listen on RESET BUTTON in Settings
   $('#reset-btn').unbind('click');
   $('#reset-btn').click(function(){
     
-    // Check for local storage support
-    if (typeof(Storage) !== "undefined") {
+    // localStorage Feature detect + local reference
+    var storage;
+    var fail;
+    var uid;
+    try {
+      uid = new Date;
+      (storage = window.localStorage).setItem(uid, uid);
+      fail = storage.getItem(uid) != uid;
+      storage.removeItem(uid);
+      fail && (storage = false);
+    } catch (exception) {}
+    
+    if (storage) {
       //SAVE user knowledge to local storage
       for (var i=0; i<ev.user.knowledge.length ; i++) {
         var id = i+1
@@ -919,8 +945,20 @@ $(document).ready(function() {
   
   
   
-  // Check for local storage support
-  if (typeof(Storage) !== "undefined") {
+  
+  // localStorage Feature detect + local reference
+  var storage;
+  var fail;
+  var uid;
+  try {
+    uid = new Date;
+    (storage = window.localStorage).setItem(uid, uid);
+    fail = storage.getItem(uid) != uid;
+    storage.removeItem(uid);
+    fail && (storage = false);
+  } catch (exception) {}
+  
+  if (storage) {
     //LOAD user knowledge from local storage
     for (var i=1; i<ev.user.knowledge.length+1; i++)  {
       var score = parseFloat(localStorage.getItem(i))
@@ -928,6 +966,7 @@ $(document).ready(function() {
       ev.user.knowledge[i-1].strength = score
     }
   }
+  
   
   
   // Start main app

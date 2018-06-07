@@ -404,7 +404,7 @@ $(document).ready(function() {
     
     
     
-    
+    console.log(ev.user.knowledge)
     
     // find sum of user strength scores
     var userStrength = ev.user.knowledge.reduce((a,b) => a + b.strength, 0);

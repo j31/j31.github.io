@@ -113,6 +113,29 @@ $(document).ready(function() {
     { term: "A fool and his money are soon parted", termId:53, def: "It's easy to waste money and it is foolish to do so.", cat: "Saying" }
   ];
   
+  // Seed data for categories
+  var categories = [
+    { category: "Proverbs",             catStrength: 7,    imgFileName: "cat_proverbs.jpg"     },
+    { category: "Geography",            catStrength: 12,   imgFileName: "cat_geography.jpg"    },
+    { category: "Technology",           catStrength: 16,   imgFileName: "cat_technology.jpg"   },
+    { category: "Fine Arts",            catStrength: 27,   imgFileName: "cat_fine_arts.jpg"    },
+    { category: "Philosophy",           catStrength: 34,   imgFileName: "cat_philosophy.jpg"   },
+    { category: "Literature",           catStrength: 26,   imgFileName: "cat_literature.jpg"   },
+    { category: "Life Sciences",        catStrength: 29,   imgFileName: "cat_life_science.jpg"    },
+    { category: "Medicine and Health",  catStrength: 65,   imgFileName: "cat_medicine.png"        },
+    { category: "Politics",             catStrength: 67,   imgFileName: "cat_politics.jpg"     },
+    { category: "Religion",             catStrength: 44,   imgFileName: "cat_religion.jpg"     },
+    { category: "Modern History",       catStrength: 24,   imgFileName: "cat_mod_history.jpg"  },
+    { category: "Business & Economics", catStrength: 56,   imgFileName: "cat_business.jpg"     },
+    { category: "Classical Music",      catStrength: 55,   imgFileName: "cat_clas_music.jpg"   },
+    { category: "Cont. History",        catStrength: 76,   imgFileName: "cat_cont_history.jpg" },
+    { category: "Pre-modern History",   catStrength: 23,   imgFileName: "cat_pre_mod_history.jpg" },
+    { category: "Physical Sciences",    catStrength: 35,   imgFileName: "cat_phys_science.jpg"    },
+    { category: "Social Sciences",      catStrength: 42,   imgFileName: "cat_social_science.jpg"  },
+    { category: "Earth Sciences",       catStrength: 23,   imgFileName: "cat_earth_science.jpg"   },
+  ]
+  
+  
   
   // Seed data for user knowlege
   var knowledge = [
@@ -897,8 +920,9 @@ $(document).ready(function() {
   }
   
   
-  
+  //  *************************************************************
   //  CHECK USER CHOICE FOR GAME
+  //  *************************************************************
   Evergreen.prototype.checkGameUserChoice = function () {
     
     
@@ -966,23 +990,23 @@ $(document).ready(function() {
       console.log(ev.gameScore);
       $('#game-score').text(ev.gameScore);
       
-      
       // Add Bonus Time to gameClock
       ev.gameClock += 5;
       
-      
+      // Adjust Strength Value
       if (ev.knowledgeTerm.strength === 0)
       ev.knowledgeTerm.strength = 3;
       else if (ev.knowledgeTerm.strength === 5)
       ev.knowledgeTerm.strength = 5;
       else {
         ev.knowledgeTerm.strength += 1;
-        $('#game-check-btn').addClass('d-none');
-        $('#game-skip-btn').addClass('d-none');
-        $('.correct').removeClass('d-none');
       }
+      
+      //  Turn off buttons and show ""correct" icon
+      $('#game-check-btn').addClass('d-none');
+      $('#game-skip-btn').addClass('d-none');
+      $('.correct').removeClass('d-none');
     }; 
-    
     
     //  bind correction logic to check button & to [ENTER]
     $('#continue-game-btn').removeClass('d-none');
@@ -1157,6 +1181,13 @@ $(document).ready(function() {
   }
   
   
+  // INJECT CATEGORY CARDS ONTO HOME PAGE
+  var html = '<div class="row">'
+  for (i in categories) {
+    html += '<div class="col-lg-2 col-md-3 col-sm-4 col-xs-6"><div class="card cat-card" style="width: 9rem;"><img class="card-img-top" src="../img/' + categories[i].imgFileName + '" alt="Card image cap"><div class="card-body"><h6 class="card-title">' + categories[i].category + '</h6><p class="card-text"><strong><span id="score">' + categories[i].catStrength + '</span></strong> %</p></div></div></div>'
+  }
+  html += '</div>'
+  $('#cat-cards').html(html)
   
   // Start main app
   // ev.state = "home"

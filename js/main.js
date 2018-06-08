@@ -278,6 +278,7 @@ $(document).ready(function() {
     $('#game-skip-btn').addClass('d-none');
     $('#game-check-btn').addClass('d-none');
     $('#game-start-btn').removeClass('d-none');
+    ev.updateProgress();
     
     // Set features and listen on CLOSE button
     $('#game-close-btn').unbind('click');
@@ -287,7 +288,7 @@ $(document).ready(function() {
       $('#home-menu').toggleClass('d-none');
       $('#navigation').toggleClass('d-none');
       $('.correct').addClass('d-none');
-      $('.wrong').addClass('d-none');      
+      $('.wrong').addClass('d-none');
       ev.updateScore();
     });
     
@@ -482,9 +483,9 @@ $(document).ready(function() {
     
     
     // if GAME skip progress bar
-    if (ev.state === "game")
-    ev.displayQuestion();
-    else
+    // if (ev.state === "game")
+    // ev.displayQuestion();
+    // else
     ev.updateProgress();
   }
   
@@ -494,6 +495,10 @@ $(document).ready(function() {
     // calculate percent done of 10 question set
     var percentDone = (ev.questionNum-1)*10;
     
+    if (ev.state === "game") {
+      percentDone = 0;
+    }
+
     // build HTML
     var html = '<div class="progress-bar bg-success" role="progressbar" style="height: 10px;width: ' + percentDone +  '%"></div>'
     

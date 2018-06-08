@@ -115,7 +115,8 @@ $(document).ready(function() {
   
   // Seed data for categories
   var categories = [
-    { category: "Proverbs",             catStrength: 7,    imgFileName: "cat_proverbs.jpg"     },
+    // { category: "Proverbs",             catStrength: 7,    imgFileName: "cat_proverbs.jpg"     },
+    { category: "Mythology",            catStrength: 17,    imgFileName: "cat_mythology.jpg"   },
     { category: "Geography",            catStrength: 12,   imgFileName: "cat_geography.jpg"    },
     { category: "Technology",           catStrength: 16,   imgFileName: "cat_technology.jpg"   },
     { category: "Fine Arts",            catStrength: 27,   imgFileName: "cat_fine_arts.jpg"    },
@@ -1182,9 +1183,9 @@ $(document).ready(function() {
   
   
   // INJECT CATEGORY CARDS ONTO HOME PAGE
-  var html = '<div class="row">'
+  var html = '<div class="row justify-content-center">'
   for (i in categories) {
-    html += '<div class="col-lg-2 col-md-3 col-sm-4 col-xs-6"><div class="card cat-card" style="width: 9rem;"><img class="card-img-top" src="../img/' + categories[i].imgFileName + '" alt="Card image cap"><div class="card-body"><h6 class="card-title">' + categories[i].category + '</h6><p class="card-text"><strong><span id="score">' + categories[i].catStrength + '</span></strong> %</p></div></div></div>'
+    html += '<div class="col-xs-6"><div class="card cat-card" style="width: 9rem;"><img class="card-img-top" src="../img/' + categories[i].imgFileName + '" alt="Card image cap"><div class="card-body"><h6 class="card-title">' + categories[i].category + '</h6><p class="card-text"><strong><span id="#">' + categories[i].catStrength + '</span></strong> %</p></div></div></div>'
   }
   html += '</div>'
   $('#cat-cards').html(html)

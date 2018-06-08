@@ -55,295 +55,350 @@
         <div class="row">
           <div class="col-md-12 mx-auto">
             <h2>Welcome to Evergreen</h2>
-            <hr>
+            <hr class="home-divider">
           </div>
         </div>
         
+        
+        
         <div class="row">
           <div class="col-md-12 mx-auto">
+            <br>
             <a id="flash-cards-btn" class="btn btn-success btn-xl game-btn"  href="#">FLASH CARDS</a>
             <a id="quiz-btn" class="btn btn-success btn-xl game-btn" href="#">QUIZ PRACTICE</a>
             <a id="game-btn" class="btn btn-success btn-xl game-btn" href="#">PLAY GAME</a>
           </div>
         </div>
+        
+        <br>
+
+        
+        <div class="row justify-content-center">
+          <!-- LEFT SIDE -->  
+           
+          <div class="col-md-3 col-sm-6">  
+            <h5 class="home-section">Currently Practicing <i class="fas fa-angle-down"></i></h5>
+            <div class="card cat-card mx-auto" style="width: 9rem;"><img class="card-img-top" src="../img/cat_proverbs.jpg" alt="Card image cap"><div class="card-body"><h6 class="card-title">Proverbs</h6><p class="card-text"><strong><span id="score"></span></strong> %</p></div></div>
+          </div>
+          
+          <!-- CENTER -->
+          <div class="col-md-3 col-sm-6">
+            <h5 class="home-section">Level</h5>
+            <br>
+            <img src="../img/level-1-icon.png" alt="" width="120">
+          </div>
+          
+          <!-- RIGHT SIDE -->
+          <div class="col-md-12 col-lg-3">
+            <h5 class="home-section">Achievements</h5>
+            <img src="../img/acheivements.png" alt="" width="200">
+          </div>
+          
+        </div>
+        
+        
+        <hr class="home-divider">
+      
+        <div class="row">
+           
+          <div class="col-lg-12 text-center">
+            <br><br>
+            <!-- <img id="logo-large" src="../img/evergreen-logo.png" alt="logo"> -->
+            <h4 class="section-heading">Browse Evergreen Topics</h4>
+            <hr class="green-dash">
+            <p class="text-faded mb-5">We process thousands of sources to identify knowledge that is durable and connected.</p>
+          </div>
+        </div>
+        
+        <!-- INJECTION OF CARDS -->
+        <!-- <div class="card-group"> -->
+          <div id="cat-cards"></div>
+          <!-- </div> -->
+          
+          
+          <!-- <div class="row bg-success home-section">
+            <div class="col-lg-8 mx-auto text-center">
+              <h2 class="section-heading text-white">We're in Beta!</h2>
+              <hr class="light green-dash">
+              <p class="text-faded mb-4">We'd love to hear from you.  If you have questions, comments or ideas, please be in touch...</p>
+              
+              <a class="btn btn-light btn-xl js-scroll-trigger" href="html/home.html">Send Us Feedback</a>
+              <br><br>
+            </div>
+          </div> -->
+          
+          
+        </div>
+      </section>
+      
+      
+      
+      
+      
+      
+      <!--
+        GAME SECTION ################################################################
+      -->
+      <section id="game" class="d-none">
         <br><br>
         <div class="container">
-          <div id="cat-cards"></div>
+          <div class="row">
+            <div class="col-md-5 text-right">
+              <h2><span id="game-score">0</span><span id="game-clock">:30</span></h2>
+            </div>
+            <div class="col-md-4 text-right">
+              <a id="game-close-btn" class="btn btn-outline-secondary btn-sm" href="#">Close</a>
+            </div>
+          </div>
         </div>
-        
-      </div>
-    </section>
-    
-    
-    
-    
-    
-    
-    <!--
-      GAME SECTION ################################################################
-    -->
-    <section id="game" class="d-none">
-      <br><br>
-      <div class="container">
         <div class="row">
-          <div class="col-md-5 text-right">
-            <h2><span id="game-score">0</span><span id="game-clock">:30</span></h2>
-          </div>
-          <div class="col-md-4 text-right">
-            <a id="game-close-btn" class="btn btn-outline-secondary btn-sm" href="#">Close</a>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-6 mx-auto">
-          <br>
-          <div class="progress" style="height:10px"></div>
-          <br>
-          <div class="question"></div><hr>
-          
-          <div class="g-answer">
-            <div id="game-answer-box1" class="game-answer">
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="game-answer" id="game-answer1" value="option1">
-                <label class="form-check-label" for="game-answer1">
-                  
-                  &nbsp; 1. <span id="g-answer1"></span>
-                  
-                </label>
-              </div>
-            </div>
+          <div class="col-md-6 mx-auto">
+            <br>
+            <div class="progress" style="height:10px"></div>
+            <br>
+            <div class="question"></div><hr>
             
-            <div id="game-answer-box2" class="game-answer">
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="game-answer" id="game-answer2" value="option2">
-                <label class="form-check-label" for="game-answer2">
-                  
-                  &nbsp; 2. <span id="g-answer2"></span>
-                  
-                </label>
-              </div>
-            </div>
-            
-            <div id="game-answer-box3" class="game-answer">
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="game-answer" id="game-answer3" value="option3">
-                <label class="form-check-label" for="game-answer3">
-                  &nbsp; 3.  <span id="g-answer3"></span>
-                </label>
-              </div>
-            </div>
-            
-            <div id="game-answer-box4" class="game-answer">
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="game-answer" id="game-answer4" value="option4">
-                <label class="form-check-label" for="game-answer4">
-                  &nbsp; 4.  <span id="g-answer4"></span>
-                </label>
-              </div>
-            </div>
-          </div>
-          
-          <br>
-          <div class="text-center">
-            <a id="game-start-btn" class="btn btn-outline-success btn-xl game-btn" href="#">Start Game</a>
-            <a id="game-skip-btn" class="btn btn-outline-warning btn-xl game-btn d-none" href="#">Skip Question</a>
-            <a id="game-check-btn" class="btn btn-outline-success btn-xl game-btn d-none" href="#">Check Answer</a>
-          </div>
-          
-          
-          <div class="row">
-            <div class="col-md-6 mx-auto">
-              
-              <div class="correct d-none text-center">
-                <i class="fas fa-check-circle fa-4x"></i>
-              </div>
-              <div class="incorrect d-none text-center">
-                <i class="fas fa-times-circle fa-4x"></i>
+            <div class="g-answer">
+              <div id="game-answer-box1" class="game-answer">
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="game-answer" id="game-answer1" value="option1">
+                  <label class="form-check-label" for="game-answer1">
+                    
+                    &nbsp; 1. <span id="g-answer1"></span>
+                    
+                  </label>
+                </div>
               </div>
               
-            </div> 
-            <div class="col-md-6 mx-auto">
-              <a id="continue-game-btn" class="btn btn-outline-success btn-xl game-btn d-none"  href="#">Continue</a><br>
-              <a class="continue-btn btn btn-outline-success btn-xl game-btn d-none"  href="#">Continue</a><br>
-            </div>
-          </div>
-          
-        </div>
-        
-      </div>
-    </div>
-  </section>
-  
-  
-  
-  
-  
-  <!--
-    QUIZ SECTION ################################################################
-  -->
-  <section id="quiz" class="d-none">
-    <br><br>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-9 text-right">
-          <a id="quiz-close-btn" class="btn btn-outline-secondary btn-sm" href="#">Close</a>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-6 mx-auto">
-          <br>
-          <div class="progress" style="height:10px"></div>
-          <br>
-          <div class="question"></div><hr>
-          
-          <div class="answer">
-            <div id="answer-box1" class="quiz-answer">
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="quiz-answer" id="quiz-answer1" value="option1">
-                <label class="form-check-label" for="quiz-answer1">
-                  
-                  &nbsp; 1. <span id="answer1"></span>
-                  
-                </label>
-              </div>
-            </div>
-            
-            <div id="answer-box2" class="quiz-answer">
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="quiz-answer" id="quiz-answer2" value="option2">
-                <label class="form-check-label" for="quiz-answer2">
-                  
-                  &nbsp; 2. <span id="answer2"></span>
-                  
-                </label>
-              </div>
-            </div>
-            
-            <div id="answer-box3" class="quiz-answer">
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="quiz-answer" id="quiz-answer3" value="option3">
-                <label class="form-check-label" for="quiz-answer3">
-                  &nbsp; 3.  <span id="answer3"></span>
-                </label>
-              </div>
-            </div>
-            
-            <div id="answer-box4" class="quiz-answer">
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="quiz-answer" id="quiz-answer4" value="option4">
-                <label class="form-check-label" for="quiz-answer4">
-                  &nbsp; 4.  <span id="answer4"></span>
-                </label>
-              </div>
-            </div>
-          </div>
-          
-          <br>
-          <div class="text-center">
-            <a id="check-answer-btn" class="btn btn-outline-success btn-xl game-btn disabled" href="#">Check Answer</a>
-          </div>
-          
-          
-          <div class="row">
-            <div class="col-md-6 mx-auto">
-              
-              <div class="correct d-none text-center">
-                <i class="fas fa-check-circle fa-4x"></i>
-              </div>
-              <div class="incorrect d-none text-center">
-                <i class="fas fa-times-circle fa-4x"></i>
+              <div id="game-answer-box2" class="game-answer">
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="game-answer" id="game-answer2" value="option2">
+                  <label class="form-check-label" for="game-answer2">
+                    
+                    &nbsp; 2. <span id="g-answer2"></span>
+                    
+                  </label>
+                </div>
               </div>
               
-            </div> 
-            <div class="col-md-6 mx-auto">
-              <a id="continue-quiz-btn" class="btn btn-outline-success btn-xl game-btn d-none"  href="#">Continue</a><br>
-              <a class="continue-btn btn btn-outline-success btn-xl game-btn d-none"  href="#">Continue</a><br>
+              <div id="game-answer-box3" class="game-answer">
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="game-answer" id="game-answer3" value="option3">
+                  <label class="form-check-label" for="game-answer3">
+                    &nbsp; 3.  <span id="g-answer3"></span>
+                  </label>
+                </div>
+              </div>
+              
+              <div id="game-answer-box4" class="game-answer">
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="game-answer" id="game-answer4" value="option4">
+                  <label class="form-check-label" for="game-answer4">
+                    &nbsp; 4.  <span id="g-answer4"></span>
+                  </label>
+                </div>
+              </div>
             </div>
+            
+            <br>
+            <div class="text-center">
+              <a id="game-start-btn" class="btn btn-outline-success btn-xl game-btn" href="#">Start Game</a>
+              <a id="game-skip-btn" class="btn btn-outline-warning btn-xl game-btn d-none" href="#">Skip Question</a>
+              <a id="game-check-btn" class="btn btn-outline-success btn-xl game-btn d-none" href="#">Check Answer</a>
+            </div>
+            
+            
+            <div class="row">
+              <div class="col-md-6 mx-auto">
+                
+                <div class="correct d-none text-center">
+                  <i class="fas fa-check-circle fa-4x"></i>
+                </div>
+                <div class="incorrect d-none text-center">
+                  <i class="fas fa-times-circle fa-4x"></i>
+                </div>
+                
+              </div> 
+              <div class="col-md-6 mx-auto">
+                <a id="continue-game-btn" class="btn btn-outline-success btn-xl game-btn d-none"  href="#">Continue</a><br>
+                <a class="continue-btn btn btn-outline-success btn-xl game-btn d-none"  href="#">Continue</a><br>
+              </div>
+            </div>
+            
           </div>
           
         </div>
-        
-      </div>
-    </div>
-  </section>
-  
-  
-  <!--
-    FLASH CARDS SECTION ############################################################
-  -->
-  <section id="flash-cards" class="d-none">
-    <br><br>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-9 text-right">
-          <a id="close-btn" class="btn btn-outline-secondary btn-sm" href="#">Close</a>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-6 mx-auto">
-          <br>
-          <div class="progress" style="height:10px"></div>
-          <br>
-          <div class="question"></div><hr>
-          <div class="answer"></div>
-          <div class="reveal-btn text-center">
-            <a id="show-answer-btn" class="btn btn-outline-success btn-xl game-btn d-none" href="#">Show Answer</a>
-          </div>
-          
-          <div class="check-btn text-center">
-            <a id="wrong-btn" class="btn btn-outline-danger btn-xl game-btn" href="#">Wrong</a>
-            <a id="correct-btn" class="btn btn-outline-success btn-xl game-btn" href="#">Correct</a>
-          </div>
-          <a class="continue-btn btn btn-outline-success btn-xl game-btn d-none"  href="#">Continue</a><br>
-          
-        </div>
-      </div>
-    </div>
-  </section>
-  
-  <footer>
-    <div class="container">
-      <br>
-      <p>&copy; 2018 Evergreen Knowledge</p>
+      </section>
       
-    </div>
-  </footer>
-  
-  
-  <!-- Optional JavaScript -->
-  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  
-  <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
-  
-  
-  <script src="../js/main.js"></script>
-  
-</body>
-</html>
-
-
-
-
-
-<!-- <div class="progress-bars">
-  <p>Progress by Area</p>
-  <div class="progress" style="height:25px">
-    <div class="progress-bar bg-warning" role="progressbar" style="width: 25%;height:25px" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"><span class="cat-label">Writings</span></div>
-  </div>
-  <div class="progress" style="height:25px">
-    <div class="progress-bar bg-danger" role="progressbar" style="width: 35%;height:25px" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"><span class="cat-label">Arts</span></div>
-  </div>
-  <div class="progress" style="height:25px">
-    <div class="progress-bar bg-info" role="progressbar" style="width: 15%;height:25px" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"><span class="cat-label">World</span></div>
-  </div>
-  <div class="progress" style="height:25px">
-    <div class="progress-bar bg-primary" role="progressbar" style="width: 75%;height:25px" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"><span class="cat-label">Science</span></div>
-  </div>
-  <div class="progress" style="height:25px">
-    <div class="progress-bar bg-success" role="progressbar" style="width: 38%;height:25px" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"><span class="cat-label">Overall</span></div>
-  </div>
-</div> -->
+      
+      
+      
+      
+      <!--
+        QUIZ SECTION ################################################################
+      -->
+      <section id="quiz" class="d-none">
+        <br><br>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-9 text-right">
+              <a id="quiz-close-btn" class="btn btn-outline-secondary btn-sm" href="#">Close</a>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 mx-auto">
+              <br>
+              <div class="progress" style="height:10px"></div>
+              <br>
+              <div class="question"></div><hr>
+              
+              <div class="answer">
+                <div id="answer-box1" class="quiz-answer">
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="quiz-answer" id="quiz-answer1" value="option1">
+                    <label class="form-check-label" for="quiz-answer1">
+                      
+                      &nbsp; 1. <span id="answer1"></span>
+                      
+                    </label>
+                  </div>
+                </div>
+                
+                <div id="answer-box2" class="quiz-answer">
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="quiz-answer" id="quiz-answer2" value="option2">
+                    <label class="form-check-label" for="quiz-answer2">
+                      
+                      &nbsp; 2. <span id="answer2"></span>
+                      
+                    </label>
+                  </div>
+                </div>
+                
+                <div id="answer-box3" class="quiz-answer">
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="quiz-answer" id="quiz-answer3" value="option3">
+                    <label class="form-check-label" for="quiz-answer3">
+                      &nbsp; 3.  <span id="answer3"></span>
+                    </label>
+                  </div>
+                </div>
+                
+                <div id="answer-box4" class="quiz-answer">
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="quiz-answer" id="quiz-answer4" value="option4">
+                    <label class="form-check-label" for="quiz-answer4">
+                      &nbsp; 4.  <span id="answer4"></span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+              
+              <br>
+              <div class="text-center">
+                <a id="check-answer-btn" class="btn btn-outline-success btn-xl game-btn disabled" href="#">Check Answer</a>
+              </div>
+              
+              
+              <div class="row">
+                <div class="col-md-6 mx-auto">
+                  
+                  <div class="correct d-none text-center">
+                    <i class="fas fa-check-circle fa-4x"></i>
+                  </div>
+                  <div class="incorrect d-none text-center">
+                    <i class="fas fa-times-circle fa-4x"></i>
+                  </div>
+                  
+                </div> 
+                <div class="col-md-6 mx-auto">
+                  <a id="continue-quiz-btn" class="btn btn-outline-success btn-xl game-btn d-none"  href="#">Continue</a><br>
+                  <a class="continue-btn btn btn-outline-success btn-xl game-btn d-none"  href="#">Continue</a><br>
+                </div>
+              </div>
+              
+            </div>
+            
+          </div>
+        </div>
+      </section>
+      
+      
+      <!--
+        FLASH CARDS SECTION ############################################################
+      -->
+      <section id="flash-cards" class="d-none">
+        <br><br>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-9 text-right">
+              <a id="close-btn" class="btn btn-outline-secondary btn-sm" href="#">Close</a>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 mx-auto">
+              <br>
+              <div class="progress" style="height:10px"></div>
+              <br>
+              <div class="question"></div><hr>
+              <div class="answer"></div>
+              <div class="reveal-btn text-center">
+                <a id="show-answer-btn" class="btn btn-outline-success btn-xl game-btn d-none" href="#">Show Answer</a>
+              </div>
+              
+              <div class="check-btn text-center">
+                <a id="wrong-btn" class="btn btn-outline-danger btn-xl game-btn" href="#">Wrong</a>
+                <a id="correct-btn" class="btn btn-outline-success btn-xl game-btn" href="#">Correct</a>
+              </div>
+              <a class="continue-btn btn btn-outline-success btn-xl game-btn d-none"  href="#">Continue</a><br>
+              
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <footer>
+        <div class="container">
+          <br>
+          <p>&copy; 2018 Evergreen Knowledge</p>
+          
+        </div>
+      </footer>
+      
+      
+      <!-- Optional JavaScript -->
+      <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+      
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      
+      <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+      
+      
+      <script src="../js/main.js"></script>
+      
+    </body>
+    </html>
+    
+    
+    
+    
+    <!-- PROGRESS BAR FOR HOME PAGE FEATURE -->
+    <!-- <div class="progress-bars">
+      <div class="progress" style="height:35px">
+        <div class="progress-bar bg-warning" role="progressbar" style="width: 25%;height:35px" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"><span class="cat-label">Writings</span></div>
+      </div>
+      <div class="progress" style="height:35px">
+        <div class="progress-bar bg-danger" role="progressbar" style="width: 35%;height:35px" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"><span class="cat-label">Arts</span></div>
+      </div>
+      <div class="progress" style="height:35px">
+        <div class="progress-bar bg-info" role="progressbar" style="width: 15%;height:35px" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"><span class="cat-label">World</span></div>
+      </div>
+      <div class="progress" style="height:35px">
+        <div class="progress-bar bg-primary" role="progressbar" style="width: 75%;height:35px" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"><span class="cat-label">Science</span></div>
+      </div>
+      <div class="progress" style="height:35px">
+        <div class="progress-bar bg-success" role="progressbar" style="width: 38%;height:35px" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"><span class="cat-label">Overall</span></div>
+      </div>
+    </div> -->

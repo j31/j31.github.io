@@ -655,10 +655,10 @@ $(document).ready(function() {
   Evergreen.prototype.getUserAnswer = function () {
     $('.check-btn').removeClass('d-none');
     
-    // <==  "w" KEY 
+    // <==  "x" KEY 
     $(document).unbind('keypress')
     $(document).keypress(function(e) {
-      if(e.which == 119 ) {
+      if(e.which == 120 ) {
         if (ev.knowledgeTerm.strength === 0)
         ev.knowledgeTerm.strength = 1;
         else {
